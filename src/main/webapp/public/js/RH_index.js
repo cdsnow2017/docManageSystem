@@ -36,7 +36,19 @@
             })
             .when("/personalCenter", {
                 templateUrl: "./public/template/personalCenter.html",
-                controller: "CheckMessageController"
+                controller: "UpLoadController"
+            })
+            .when("/leaderIndex", {
+                templateUrl: "./public/template/leaderIndex.html",
+                // controller: "CheckMessageController"
+            })
+            .when("/resIndex", {
+                templateUrl: "./public/template/resIndex.html",
+                // controller: "CheckMessageController"
+            })
+            .when("/sysIndex", {
+                templateUrl: "./public/template/sysIndex.html",
+                // controller: "CheckMessageController"
             })
             .otherwise({ redirectTo: "/index" });
 
@@ -53,6 +65,13 @@
         $scope.docData
  = function() {
             $scope.myboolean = !$scope.myboolean;
+        }
+    });
+    app.controller('UpLoadController', function($scope) {
+        $scope.myboolean2 = true;
+        $scope.docData2
+ = function() {
+            $scope.myboolean2 = !$scope.myboolean2;
         }
     });
 }(angular, window);
