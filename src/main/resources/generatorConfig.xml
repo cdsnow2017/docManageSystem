@@ -47,16 +47,16 @@
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
 		
-		<table tableName="Rms.user"></table>
-		<table tableName="Rms.resourceType"></table>
-		<table tableName="Rms.resource"></table>
-		<table tableName="Rms.role"></table>
-		<table tableName="Rms.role_systemAuthority"></table>
-		<table tableName="Rms.section"></table>
-		<table tableName="Rms.section_userauthority_ resourcetype"></table>
-		<table tableName="Rms.systemAuthority"></table>
-		<table tableName="Rms.user_role"></table>
-		<table tableName="Rms.userauthority"></table>
+		<table tableName="user"></table>
+		<table tableName="resourceType"></table>
+		<table tableName="resource"></table>
+		<table tableName="role"></table>
+		<table tableName="role_systemAuthority"></table>
+		<table tableName="section"></table>
+		<table tableName="section_userauthority_ resourcetype"></table>
+		<table tableName="systemAuthority"></table>
+		<table tableName="user_role"></table>
+		<table tableName="userauthority"></table>
 		
 
 	</context>

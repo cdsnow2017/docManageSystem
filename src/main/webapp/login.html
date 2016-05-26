@@ -159,15 +159,15 @@
         $scope.loginCheck = function() {
             var userType = $("#myname").val();
             $http({
-                url: "loginCheck",
+                url: "./user/login.action",
                 method: "post",
                 data: {
-                    userType: userType,
-                    userName: $scope.username,
+                    roleid: userType,
+                    userid: $scope.username,
                     password: $scope.password
                 }
             }).success(function(response) {
-                if (response === "1") {
+                if (response.state === "1") {
                     console.log("hah:" + userType)
                     switch (userType) {
                         case "1":

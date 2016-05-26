@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
 
 
- 	<bean id="TestController" class="edu.ynu.docmanagesystem.controller.TestController"></bean>
+ 	<bean id="UserService" class="edu.ynu.docmanagesystem.service.impl.UserServiceImpl"></bean>
 
 	
  
