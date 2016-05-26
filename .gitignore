@@ -38,6 +38,12 @@ hs_err_pid*
 #忽略编译类
 target/**
 
+#忽略
+.sass-cache/**
+
+#忽略
+node_modules/**
+
 
 #保留文件夹
 !.gitkeep
