@@ -14,7 +14,9 @@
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.4.0</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
-		<!-- <slf4j.version>1.6.6</slf4j.version> <log4j.version>1.2.9</log4j.version> -->
+		<slf4j.version>1.7.21</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+		<!-- 解决maven编译时的编码问题 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -24,7 +26,40 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- 日志文件管理包 -->
+		<!-- log start -->
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- log end -->
+
 
 		<!-- spring核心包 -->
 		<!-- springframe start -->
@@ -137,7 +172,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
@@ -158,9 +193,7 @@
 				<version>9.3.9.v20160517</version>
 				<configuration>
 					<scanIntervalSeconds>3</scanIntervalSeconds>
-					<!-- <webApp>
-						<contextPath>/test</contextPath>
-					</webApp> -->
+					<!-- <webApp> <contextPath>/test</contextPath> </webApp> -->
 					<stopPort>9966</stopPort>
 					<stopKey>foo</stopKey>
 				</configuration>
