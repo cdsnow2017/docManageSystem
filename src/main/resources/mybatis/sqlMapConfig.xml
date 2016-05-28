@@ -5,6 +5,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 
 	<!-- 全局setting配置，根据需要添加 -->
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+	</settings>
+
 
 	<!-- 配置别名 -->
 	<typeAliases>
@@ -13,8 +17,5 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="edu.ynu.docmanagesystem.poExtend" />
 	</typeAliases>
 
-	<!-- 配置mapper 由于使用spring和mybatis的整合包进行mapper扫描，这里不需要配置了。 必须遵循：mapper.xml和mapper.java文件同名且在一个目录 -->
-
-	<!-- <mappers> </mappers> -->
 
 </configuration>
