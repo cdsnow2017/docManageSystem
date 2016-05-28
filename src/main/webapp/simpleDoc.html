@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./public/stylesheet/bootstrap.min.css">
+    <link href="./public/stylesheet/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="./public/stylesheet/W_index.css">
+    <link rel="stylesheet" href="./public/stylesheet/DBW_login.css">
+    <link rel="stylesheet" href="./public/stylesheet/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+   <div class="panel panel-primary container">
+    <div class="panel-heading" style="margin-top: 10px">
+        <div class="panel-title">
+            <h1>文档在线预览系统</h1></div>
+    </div>
+    <div class="panel-body" ng-controller="CheckMessageController">
+        <div class="raw">
+            <div class="col-md 12">
+                <!-- 水平排布 -->
+                <form class="form-horizontal" role="form">
+                    <!-- 每个form元素需用form-group包裹 -->
+                    <div class="form-group bg-success">
+                        <div class="col-md-offset-2">
+                            <h3>标题:关于2013年秋季学期学生选课通知</h3></div>
+                    </div>
+                    <div class="form-group bg-info">
+                        <div class="row" style="padding-left: 30px">
+                                <label for="exampleInputFile1">
+                                    <h5>查看人数:15</h5></label>
+                                <label for="exampleInputFile2">
+                                    <h5>下载人数:6</h5></label>
+                                <label for="exampleInputFile2">
+                                    <h5>暂无评论</h5></label>
+                        </div>
+                    </div>
+                    <div class="from-group">
+                        <div class="raw">
+                            <div id="documentViewer" class="flexpaper_viewer col-md-9" style=" height: 540px; margin: 0;"></div>
+                            <div class="col-md-3">
+                                <div class=" bg-danger" style="margin-top:30px;">
+                                    <address>
+                                        <strong>cdsnow2017 && Jack Ren</strong>
+                                        <br>
+                                        <strong>We always enjoy something new!</strong>
+                                        <br> 795 Yucang Ave, Suite 600
+                                        <br> Yunnan, CA 94107
+                                        <br>
+                                        <abbr title="Phone">P:</abbr> (123) 7758-521
+                                    </address>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                            // var startDocument = "Paper"; // $('#documentViewer').FlexPaperViewer({ // config : { // SWFFile : '2.swf', // Scale : 1.0, // ZoomTransition : 'easeOut', // ZoomTime : 0.5, // ZoomInterval : 0.2, // FitPageOnLoad : true, // FitWidthOnLoad : true, // FullScreenAsMaxWindow : false, // ProgressiveLoading : false, // MinZoomSize : 0.2, // MaxZoomSize : 5, // SearchMatchAll : false, // InitViewMode : 'Portrait', // RenderingOrder : 'flash', // StartAtPage : '', // ViewModeToolsVisible : true, // ZoomToolsVisible : true, // NavToolsVisible : true, // CursorToolsVisible : true, // SearchToolsVisible : true, // WMode : 'window', // localeChain : 'en_US' // } // });
+                            </script>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="./public/js/jquery.min.js"></script>
+    <script src="./public/js/bootstrap.min.js"></script>
+    <script src="./public/js/angular.js"></script>
+    <script src="./public/js/angular.route.min.js"></script>
+    <script src="./public/js/RH_index.js"></script>
+</body>
+
+</html>
