@@ -11,17 +11,17 @@ app.post("/loginCheck", function(req, res) {
     console.log(req.body);
     // 测试数据 
     var example = {
-        teacher: {
-            name: "teacher",
-            password: "teacher"
+        leader: {
+            name: "leader",
+            password: "leader"
         },
-        admin: {
-            name: "admin",
-            password: "admin"
+        res: {
+            name: "res",
+            password: "res"
         },
-        record: {
-            name: "record",
-            password: "record"
+        sys: {
+            name: "sys",
+            password: "sys"
         },
         sr: {
             name: "sr",
@@ -40,13 +40,13 @@ app.post("/loginCheck", function(req, res) {
             // 处理
         switch (user.type) {
             case "1":
-                compareUser(user, example.teacher);
+                compareUser(user, example.leader);
                 break;
             case "2":
-                compareUser(user, example.admin);
+                compareUser(user, example.res);
                 break;
             case "3":
-                compareUser(user, example.record);
+                compareUser(user, example.sys);
                 break;
             default:
                 compareUser(user, example.sr);
