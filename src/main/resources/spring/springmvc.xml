@@ -13,27 +13,25 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
 
-	<!-- 可以扫描controller、service、... 这里让扫描controller，指定controller的包 -->
+
 	<context:component-scan base-package="edu.ynu.docmanagesystem"
 		use-default-filters="false">
-		<context:include-filter type="regex"
-			expression="edu.ynu.docmanagesystem.service.impl.*" />
-
-		<context:include-filter type="regex"
-			expression="edu.ynu.docmanagesystem.controller.*" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<!-- 开启aop，对类代理 <aop:config proxy-target-class="true"></aop:config> 开启shiro注解支持 
+			<bean class=" org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> 
+			<property name="securityManager" ref="securityManager" /> </bean> -->
 
 
 	</context:component-scan>
 
+	<!-- 加入对静态资源的处理，允许使用/作整体映射 -->
+	<mvc:default-servlet-handler />
 
-	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置 mvc:annotation-driven默认加载很多的参数绑定方法， 
-		比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter 
-		实际开发时使用mvc:annotation-driven -->
-	<mvc:annotation-driven>
+	<!-- 开启注解，注册注解映射器和适配器，提供数据绑定和json解析支持等 -->
+	<mvc:annotation-driven />
 
-	</mvc:annotation-driven>
 
-	<!-- <context:annotation-config /> -->
 
 
 

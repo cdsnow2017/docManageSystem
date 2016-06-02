@@ -159,7 +159,7 @@
         $scope.loginCheck = function() {
             var userType = $("#myname").val();
             $http({
-                url: "./user/login.action",
+                url: "/user/login",
                 method: "post",
                 data: {
                     roleid: userType,

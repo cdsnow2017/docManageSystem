@@ -1,5 +1,7 @@
 package edu.ynu.docmanagesystem.service;
 
+import edu.ynu.docmanagesystem.po.UserThis;
+
 /**
  * description:
  * @author cdsnow2017@163.com
@@ -24,7 +26,9 @@ public interface UserService {
 	 * @param userAuthorityId 所请求的功能id
 	 * @return 0：不具有 1：具有 
 	 */
-	int userAuthenticate(Integer userId,Integer resourceId,Integer userAuthorityId); 
+	int userAuthenticate(Integer userId,Integer resourceId,Integer userAuthorityId);
+	
+	UserThis findUserById(Integer userId);
 	
 	
 }
