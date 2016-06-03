@@ -11,8 +11,8 @@
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-			connectionURL="jdbc:sqlserver://localhost:1433;databaseName=ResourceManagerSystem" userId="root"
-			password="131421">
+			connectionURL="jdbc:sqlserver://localhost:1433;databaseName=ResourceManagerSystem"
+			userId="root" password="131421">
 		</jdbcConnection>
 		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
 			userId="yycg" password="yycg"> </jdbcConnection> -->
@@ -31,14 +31,14 @@
 			<!-- 从数据库返回的值被清理前后的空格 -->
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
-		
+
 		<!-- targetProject:mapper映射文件生成的位置 -->
 		<sqlMapGenerator targetPackage="mapper"
 			targetProject=".\src\main\resources\mybatis">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
-		
+
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
 			targetPackage="edu.ynu.docmanagesystem.mapper" targetProject=".\src\main\java">
@@ -46,18 +46,15 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
-		
-		<table tableName="user_this"></table>
-		<!-- <table tableName="resourceType"></table>
-		<table tableName="resource"></table>
-		<table tableName="role"></table>
-		<table tableName="role_systemAuthority"></table>
-		<table tableName="section"></table>
-		<table tableName="section_userauthority_ resourcetype"></table>
-		<table tableName="systemAuthority"></table>
-		<table tableName="user_role"></table>
-		<table tableName="userauthority"></table> -->
-		
+
+		<!-- <table tableName="user_this"></table> -->
+		<!-- <table tableName="resourceType"></table> <table tableName="resource"></table> 
+			<table tableName="role"></table> <table tableName="role_systemAuthority"></table> 
+			<table tableName="section"></table> <table tableName="section_userauthority_ 
+			resourcetype"></table> <table tableName="systemAuthority"></table> <table 
+			tableName="user_role"></table> <table tableName="userauthority"></table> -->
+		<table tableName="role_menu"></table>
+
 
 	</context>
 </generatorConfiguration>

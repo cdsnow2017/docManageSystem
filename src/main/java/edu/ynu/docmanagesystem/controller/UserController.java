@@ -40,4 +40,12 @@ public class UserController {
 		return state;
 	}
 
+	@RequestMapping("/menu")
+	public @ResponseBody String selectMenu() {
+		Subject subject = SecurityUtils.getSubject();
+		Integer userId = (Integer) subject.getPrincipal();
+		return userService.findMenuById(userId);
+
+	}
+
 }
