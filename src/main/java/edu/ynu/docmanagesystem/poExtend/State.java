@@ -1,7 +1,8 @@
 package edu.ynu.docmanagesystem.poExtend;
 
+
 public class State{
-	private String state;
+	private String state = "0";
 
 	public String getState() {
 		return state;
