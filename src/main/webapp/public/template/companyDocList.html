@@ -2,11 +2,7 @@
 	<form class="form-horizontal">
     <h2 class="page-header">公司文档列表</h2>
         <div class="form-group">
-        <div class="col-md-5 col-md-offset-1">
-                <label>按名称查询：</label>
-                <input id="txtkey" type="text" ng-model="key">
-            </div>
-            <div class="col-md-2 col-md-offset-4">
+            <div class="col-md-2 col-md-offset-10">
                 <div class="dropdown">
                     <button class="btn btn-default" data-toggle="dropdown" type="button">
                         功能列表 <span class="caret"></span>
@@ -47,20 +43,13 @@
         </div>
         <div class="form-group">
             <div class="col-md-8 col-md-offset-4">
-                  <ul class="pagination">
-                    <li>
+                  <ul class="pagination" id="ul">
+                    <li ng-click="prePage()">
                       <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li>
+                    <li id="lastPage" ng-click="lastPage()">
                       <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
