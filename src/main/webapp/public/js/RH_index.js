@@ -105,33 +105,31 @@
     });
 
 
-    app.controller('UpLoadController', function($scope) {
+    app.controller('UpLoadController', function($scope,$http) {
         $scope.myboolean2 = true;
         $scope.data = 
-            { "resManage": true, "autManage": true, "graph": true, "doc": true}
-        ;
-        // $http({
-        //     url: "/personalCenter",
-        //     method: "GET",
-        //     params: {
-                
-        //     }
-        // }).success(function(response) {
-        //     if(response.data.indexOf("") >= 0){
-        //              data.resManage = false;
-        //     }
-        //     if(response.data.indexOf("") >= 0){
-        //              data.autManage = false;
-        //     }
-        //     if(response.data.indexOf("") >= 0){
-        //              data.graph = false;
-        //     }
-        //     if(response.data.indexOf("") >= 0){
-        //              data.doc = false;
-        //     }
-        // }).error(function(response) {
-        //     console.log("妈比");
-        // })
+            { "resManage": true, "autManage": true, "graph": true, "doc": true};
+        $http({
+            url: "/personalCenter",
+            method: "GET",
+            params: {
+            }
+        }).success(function(response) {
+            if(response.data.indexOf("") >= 0){
+                     data.resManage = false;
+            }
+            if(response.data.indexOf("") >= 0){
+                     data.autManage = false;
+            }
+            if(response.data.indexOf("") >= 0){
+                     data.graph = false;
+            }
+            if(response.data.indexOf("") >= 0){
+                     data.doc = false;
+            }
+        }).error(function(response) {
+            console.log("妈比");
+        })
         $scope.docData2 = function() {
             $scope.myboolean2 = !$scope.myboolean2;
         }
