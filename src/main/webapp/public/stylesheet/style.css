@@ -85,11 +85,15 @@ background-size:100%;background-repeat: no-repeat;
 border-radius:10px 10px 10px 10px;
     box-shadow: 0 0 10px black;
 }
-.h_h3{
-    margin-left: 350px;
+.resManage .h_h3{
+    margin-left: 0px;
+    margin-top: 50px;
+}
+.history .h_h3{
+    margin-left: 0px;
     margin-top: 50px;
 }
 .p_h3{
-    margin-left: 350px;
+    margin-left: 0px;
     margin-top: 50px;
 }

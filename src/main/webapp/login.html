@@ -93,17 +93,6 @@
                 <div class="col-md-5 col-md-offset-2  k4" ng-controller="loginController">
                     <div class="k9">
                         <h1 class="k2">登陆</h1></div>
-                    <div class="row">
-                        <div class="col col-md-3 status" id="package_1" onclick="choose(1)">
-                            <p class="sec-icon">领导<i class="glyphicon glyphicon-ok"></i></p>
-                        </div>
-                        <div class="col col-md-3 status" id="package_2" onclick="choose(2)">
-                            <p class="sec-icon">资料管理员<i class="glyphicon glyphicon-ok"></i></p>
-                        </div>
-                        <div class="col col-md-3 status" id="package_3" onclick="choose(3)">
-                            <p class="sec-icon">系统管理员<i class="glyphicon glyphicon-ok"></i></p>
-                        </div>
-                    </div>
                     <form ng-submit="loginCheck()" novalidate>
                         <input type="hidden" value="4" ng-model="userType" name="userType" id="myname" />
                         <div class="input-group login1">
@@ -111,7 +100,7 @@
                             <input type="text" class="form-control" ng-model="username" name="username" id="exampleInputAmount" placeholder="Username" style="width: 80%">
                         </div>
                         <div class="input-group login1" style="margin-top: 30px">
-                            <div class="input-group-addon"><i class="icon-key"></i></div>
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
                             <input type="password" class="form-control" ng-model="password" name="password" id="exampleInputAmount2" placeholder="Password" style="width: 80%">
                         </div>
                         <button type="submit" class="btn btn-primary btn-group-justified login2" style="width: 60%">提交</button>
@@ -159,27 +148,25 @@
         $scope.loginCheck = function() {
             var userType = $("#myname").val();
             $http({
-                url: "./user/login.action",
+                url: "/loginCheck",
                 method: "post",
                 data: {
-                    roleid: userType,
                     userid: $scope.username,
                     password: $scope.password
                 }
             }).success(function(response) {
-                if (response.state === "1") {
-                    console.log("hah:" + userType)
-                    switch (userType) {
-                        case "1":
-                            location.href = "/index.html#/leaderIndex";break;
-                        case "2":
-                            location.href = "/index.html#/resIndex";break;
-                        case "3":
-                            location.href = "/index.html#/sysIndex";break;
-                         default:
-                            location.href = "/index.html#/personalCenter";break;
-                    }
-                }
+                // if (response.state === "3") {
+                    // switch (userType) {
+                    //     case "1":
+                    //         location.href = "/index.html#/leaderIndex";break;
+                    //     case "2":
+                    //         location.href = "/index.html#/resIndex";break;
+                    //     case "3":
+                    //         location.href = "/index.html#/sysIndex";break;
+                    //      default:
+                             location.href = "/index.html#/personalCenter";
+                    // }
+               // }
             })
         }
     })

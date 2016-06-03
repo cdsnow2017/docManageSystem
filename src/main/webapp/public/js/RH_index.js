@@ -15,7 +15,32 @@
             replace: true
         }
     });
+    app.service("setPage", function() {
+        return {
+            init: function(pages, callback) {
 
+                var lastPage = document.getElementById("lastPage");
+                var fNode = document.getElementById("ul");
+                for (var i = 1; i <= pages; i++) {
+                    var newNode = document.createElement("li");
+                    var AElement = document.createElement("a");
+                    var textnode = document.createTextNode(i);
+                    AElement.appendChild(textnode);
+                    newNode.appendChild(AElement);
+                    newNode.addEventListener("click", function() {
+
+                        var index = i;
+                        return function() {
+                            callback(index);
+                        }
+                    }())
+                    fNode.insertBefore(newNode, lastPage);
+
+                }
+
+            }
+        }
+    })
 
     app.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when("/index", {
@@ -36,19 +61,31 @@
             })
             .when("/personalCenter", {
                 templateUrl: "./public/template/personalCenter.html",
-                controller: "UpLoadController"
+                // controller: "personalCenterController"
             })
-            .when("/leaderIndex", {
-                templateUrl: "./public/template/leaderIndex.html",
-                // controller: "CheckMessageController"
+            .when("/resManage", {
+                templateUrl: "./public/template/resManage.html",
+                // controller: "UpLoadController"
             })
-            .when("/resIndex", {
-                templateUrl: "./public/template/resIndex.html",
-                // controller: "CheckMessageController"
+            .when("/autManage", {
+                templateUrl: "./public/template/autManage.html",
+                // controller: "UpLoadController"
             })
-            .when("/sysIndex", {
-                templateUrl: "./public/template/sysIndex.html",
-                // controller: "CheckMessageController"
+            .when("/myDoc", {
+                templateUrl: "./public/template/myDoc.html",
+                // controller: "UpLoadController"
+            })
+            .when("/docList", {
+                templateUrl: "./public/template/docList.html",
+                // controller: "UpLoadController"
+            })
+            .when("/history", {
+                templateUrl: "./public/template/history.html",
+                // controller: "UpLoadController"
+            })
+            .when("/personalInfo", {
+                templateUrl: "./public/template/personalInfo.html",
+                // controller: "UpLoadController"
             })
             .otherwise({ redirectTo: "/index" });
 
@@ -70,55 +107,133 @@
 
     app.controller('UpLoadController', function($scope) {
         $scope.myboolean2 = true;
+        $scope.data = 
+            { "resManage": true, "autManage": true, "graph": true, "doc": true}
+        ;
+        // $http({
+        //     url: "/personalCenter",
+        //     method: "GET",
+        //     params: {
+                
+        //     }
+        // }).success(function(response) {
+        //     if(response.data.indexOf("") >= 0){
+        //              data.resManage = false;
+        //     }
+        //     if(response.data.indexOf("") >= 0){
+        //              data.autManage = false;
+        //     }
+        //     if(response.data.indexOf("") >= 0){
+        //              data.graph = false;
+        //     }
+        //     if(response.data.indexOf("") >= 0){
+        //              data.doc = false;
+        //     }
+        // }).error(function(response) {
+        //     console.log("妈比");
+        // })
         $scope.docData2 = function() {
             $scope.myboolean2 = !$scope.myboolean2;
         }
     });
 
 
-    app.controller('sectionDocListController', function($http,$scope) {
-        // $scope.bold = "bold";
+    app.controller('sectionDocListController', function($http, $scope) {
         $scope.key = '';
         $scope.data = [
-            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr"},
-            { name: "css实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr"},
-            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr"},
-            { name: "HTML实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr"},
-            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr"},
+            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr" },
+            { name: "css实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr" },
+            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr" },
+            { name: "HTML实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr" },
+            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr" },
         ];
         $http({
+            url: "./user/login.action",
+            method: "GET",
+            params: {
+
+            }
+        }).success(function(response) {
+            $scope.data = response.data;
+        }).error(function(response) {
+            console.log("妈比");
+        })
+    });
+
+    app.controller('companyDocListController', function($http, $scope, setPage) {
+        // setPage.init(5,alert);
+        //每页显示的条数
+        $scope.num = 5;
+        //分页数
+        var currentPage = 1;
+        $scope.totalNum = 0;
+
+        //显示内容
+        $scope.data = [
+            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr", section: "人事部" },
+            { name: "css实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr", section: "人事部" },
+            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr", section: "人事部" },
+            { name: "HTML实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr", section: "人事部" },
+            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr", section: "人事部" },
+        ];
+        $http({
+            url: "./user/login.action",
+            method: "GET",
+            params: {
+                num: $scope.num
+            }
+        }).success(function(response) {
+            $scope.totalNum = response.data;
+            setPage($scope.totalNum, $scope.getData);
+
+        }).error(function(response) {
+            console.log("妈比");
+        })
+
+        $scope.getData = function(page) {
+            currentPage = page;
+            $http({
                 url: "./user/login.action",
                 method: "GET",
-                params:{
-
+                params: {
+                    pageNum: page
                 }
             }).success(function(response) {
                 $scope.data = response.data;
             }).error(function(response) {
                 console.log("妈比");
             })
+
+        }
+        $scope.prePage = function() {
+            if (currentPage !== 1) {
+                $scope.page($scope.getData(currentPage - 1));
+            }
+        }
+        $scope.lastPage = function() {
+            if (currentPage !== $scope.totalNum) {
+                $scope.page($scope.getData(currentPage + 1));
+            }
+        }
+        $scope.getData(1);
     });
 
-    app.controller('companyDocListController', function($http,$scope) {
-        // $scope.bold = "bold";
-        $scope.key = '';
-        $scope.data = [
-            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr",section:"人事部"},
-            { name: "css实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr",section:"人事部"},
-            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr",section:"人事部"},
-            { name: "HTML实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr",section:"人事部"},
-            { name: "angular实战", type: "工作计划", uploadTime: "2016-01-17", updateTime: "2016-01-17", author: "sr",section:"人事部"},
-        ];
-        $http({
-                url: "./user/login.action",
-                method: "GET",
-                params:{
-                    
-                }
-            }).success(function(response) {
-                $scope.data = response.data;
-            }).error(function(response) {
-                console.log("妈比");
-            })
-    });
+    //     app.controller('personalCenterController', function($http, $scope) {
+    //     $scope.data = [
+    //         { btn1: true, btn2: false, btn3: false,},
+    //     ];
+    // $http({
+    //     url: "/personalCenter",
+    //     method: "GET",
+    //     params: {
+    //         check1:btn1
+    //         check2:btn2
+    //         check3:btn3
+    //     }
+    // }).success(function(response) {
+    //     $scope.data = response.data;
+    // }).error(function(response) {
+    //     console.log("妈比");
+    // })
+    // });
 }(angular, window);

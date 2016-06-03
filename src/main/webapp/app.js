@@ -33,20 +33,13 @@ app.post("/loginCheck", function(req, res) {
     // 提取数据
     if (req.body) {
         var user = {
-                type: req.body.userType,
                 name: req.body.userName,
                 password: req.body.password
             }
             // 处理
-        switch (user.type) {
-            case "1":
-                compareUser(user, example.leader);
-                break;
-            case "2":
-                compareUser(user, example.res);
-                break;
-            case "3":
-                compareUser(user, example.sys);
+        switch (user.name) {
+            case "sr":
+                compareUser(user, example.sr);
                 break;
             default:
                 compareUser(user, example.sr);
