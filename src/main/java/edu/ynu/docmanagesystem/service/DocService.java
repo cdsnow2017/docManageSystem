@@ -1,0 +1,42 @@
+package edu.ynu.docmanagesystem.service;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public interface DocService {
+
+	/**
+	 * description: 把上传的文件存储到数据库中
+	 * @param userId
+	 * @param file
+	 * @param resourceTypeId
+	 * @param resourceDescribe
+	 * @return 资源id
+	 */
+	Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, Integer resourceTypeId,
+	        String resourceDescribe, double size);
+
+	/**
+	 * description: 转换文档为PDF
+	 * @param inputStream 源文档输入流
+	 * @param extendName 源文档扩展名
+	 * @return 目标PDF输出流
+	 */
+	void transferDocToPdf(InputStream inputStream, String extendName, OutputStream outputStream);
+
+	/**
+	 * description: 将pdf转换成swf
+	 * @param pdfPath pdf文件的路径
+	 * @return 目标swf的输入流
+	 * @throws Exception 
+	 */
+	InputStream transferPdfToSwf(String pdfPath) throws Exception;
+
+	/**
+	 * description: 把生成的swf文件存入资源的字段中
+	 * @param resourceId 资源id
+	 * @return 
+	 */
+	Integer insertSwfToDb(byte[] swf, Integer resourceId);
+
+}
