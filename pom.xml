@@ -218,9 +218,23 @@
 			<artifactId>ehcache-core</artifactId>
 			<version>2.6.11</version>
 		</dependency>
-
-
 		<!-- shiro安全框架 end -->
+
+		<!-- JODConverter converts between different office documents formats, 
+			using OpenOffice.org. -->
+		<dependency>
+			<groupId>com.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+
 
 	</dependencies>
 
