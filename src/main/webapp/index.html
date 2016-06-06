@@ -34,23 +34,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;" ng-click="docData2()">
-                                <button class="btn btn-warning" style="width: 100%;" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传文件</button>
+                                <button class="btn btn-warning" style="width: 100%;" type="button" onclick="location.href='#/upload'"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传文件</button>
                             </div>
                         </div>
 
-                        <div class="row" ng-hide="myboolean2">
-                            <!-- <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
-                                <button class="btn btn-default btn-sm" style="width: 100%;" type="submit" ng-click="upload()">确认上传</button>
-                            </div>
-
-                            <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
-                                <input type="file">
-                            </div> -->
-                            <form action="" method="post" enctype="multipart/form-data">
-                                <input type="file" name="fileUpload"></input>
-                                <input class="btn btn-danger btn-sm" type="submit" value="上传文件"></input>
-                            </form>
-                        </div>
+                        
 
                         <div class="row2" ng-hide="data.resManage">
                             <div class="col-md-10 col-md-offset-1">

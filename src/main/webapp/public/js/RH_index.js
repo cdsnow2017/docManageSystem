@@ -76,6 +76,9 @@
 		}).when("/personalInfo", {
 			templateUrl : "./public/template/personalInfo.html",
 		// controller: "UpLoadController"
+	}).when("/upload", {
+			templateUrl : "./public/template/upload.html",
+		// controller: "UpLoadController"
 		}).otherwise({
 			redirectTo : "/index"
 		});
