@@ -20,76 +20,83 @@
             <!-- <div ng-view>
             </div> -->
             <div class="personalCenter">
-    <h2 class="page-header "><span class="label label-default log2">应用中心</span></h2>
-    <div class="row col-md-12" ng-controller="UpLoadController">
-        <div class="col-md-2 pc1">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 pic" style="background-image:url(public/images/111.jpg);">
+                <h2 class="page-header "><span class="label label-default log2">应用中心</span></h2>
+                <div class="row col-md-12" ng-controller="UpLoadController">
+                    <div class="col-md-2 pc1">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1 pic" style="background-image:url(public/images/111.jpg);">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
+                                你说啥玩意儿
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;" ng-click="docData2()">
+                                <button class="btn btn-warning" style="width: 100%;" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传文件</button>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-hide="myboolean2">
+                            <!-- <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
+                                <button class="btn btn-default btn-sm" style="width: 100%;" type="submit" ng-click="upload()">确认上传</button>
+                            </div>
+
+                            <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
+                                <input type="file">
+                            </div> -->
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <input type="file" name="fileUpload"></input>
+                                <input class="btn btn-danger btn-sm" type="submit" value="上传文件"></input>
+                            </form>
+                        </div>
+
+                        <div class="row2" ng-hide="data.resManage">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/resManage'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 资源管理</h4>
+                            </div>
+                        </div>
+                        <div class="row2" ng-hide="data.autManage">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/autManage'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 权限管理</h4>
+                            </div>
+                        </div>
+                        <div class="row2" ng-hide="data.graph">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/'"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 统计报表</h4>
+                            </div>
+                        </div>
+                        <div class="row2" ng-hide="data.doc">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/docList'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 查看文档</h4>
+                            </div>
+                        </div>
+                        <div class="row2">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="mydoc" onclick="location.href='#/myDoc'"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 我的文档</h4>
+                            </div>
+                        </div>
+                        <div class="row2">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="history" onclick="location.href='#/history'"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> 历史记录</h4>
+                            </div>
+                        </div>
+                        <div class="row2">
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/personalInfo'"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 个人信息</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10 pc2" id="pc2" style="border: 1px solid red;height: 650px">
+                        <div ng-view style="height: 650px;line-height:650px;overflow:auto;overflow-x:hidden;">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
-                    你说啥玩意儿
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;" ng-click="docData2()">
-                    <button class="btn btn-warning" style="width: 100%;" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传文件</button>
-                </div>
-            </div>
-            <div class="row" ng-hide="myboolean2">
-                <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
-                    <button class="btn btn-default btn-sm" style="width: 100%;" type="button">确认上传</button>
-                </div>
-                <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
-                        <input type="file">
-                </div>
-            </div>
-            <div class="row2" ng-hide="data.resManage">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="personalInfo" onclick="location.href='#/resManage'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 资源管理</h4>
-                </div>
-            </div>
-            <div class="row2" ng-hide="data.autManage">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="personalInfo" onclick="location.href='#/autManage'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 权限管理</h4>
-                </div>
-            </div>
-            <div class="row2" ng-hide="data.graph">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="personalInfo" onclick="location.href='#/'"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 统计报表</h4>
-                </div>
-            </div>
-            <div class="row2" ng-hide="data.doc">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="personalInfo" onclick="location.href='#/docList'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 查看文档</h4>
-                </div>
-            </div>
-            <div class="row2">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="mydoc" onclick="location.href='#/myDoc'"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 我的文档</h4>
-                </div>
-            </div>
-            <div class="row2">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="history" onclick="location.href='#/history'"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> 历史记录</h4>
-                </div>
-            </div>
-            <div class="row2">
-                <div class="col-md-10 col-md-offset-1">
-                    <h4 class="btn" id="personalInfo" onclick="location.href='#/personalInfo'"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 个人信息</h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10 pc2" id="pc2" style="border: 1px solid red;height: 650px">
-            <div ng-view style="height: 650px;line-height:650px;overflow:auto;overflow-x:hidden;">
             </div>
         </div>
     </div>
-</div>
-        </div>
-    </div>
-   <foot></foot>
+    <foot></foot>
     <script src="./public/js/jquery.min.js"></script>
     <script src="./public/js/bootstrap.min.js"></script>
     <script src="./public/js/angular.js"></script>

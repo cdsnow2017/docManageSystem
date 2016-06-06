@@ -22,7 +22,7 @@
 		<!-- 认证成功统一跳转到first.action，建议不配置，shiro认证成功自动到上一个请求路径 -->
 		<!-- <property name="successUrl" value="/first.action"/> -->
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面 -->
-		<property name="unauthorizedUrl" value="/refuse.html" />
+		<property name="unauthorizedUrl" value="/login.html" />
 		<!-- 自定义filter配置 -->
 		<!-- <property name="filters"> <map> 将自定义 的FormAuthenticationFilter注入shiroFilter中 
 			<entry key="authc" value-ref="formAuthenticationFilter" /> </map> </property> -->
@@ -35,6 +35,7 @@
 				/js/** = anon
 				/public/** = anon
 				/user/login = anon
+				/user/menu = authc
 				<!-- 验证码，可匿名访问 -->
 				<!-- /validatecode.jsp = anon -->
 

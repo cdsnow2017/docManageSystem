@@ -1,5 +1,7 @@
 package edu.ynu.docmanagesystem.service;
 
+import java.util.List;
+
 import edu.ynu.docmanagesystem.po.UserThis;
 
 /**
@@ -17,8 +19,8 @@ public interface UserService {
 	 * @param roleId 选择的登录角色id
 	 * @return -1：用户不存在  1：登录成功  0：用户无此角色权限 -2：密码错误
 	 */
-	int loginVerify(Integer userId,String  password, Integer roleId); 
-	
+	int loginVerify(Integer userId, String password, Integer roleId);
+
 	/**
 	 * description: 验证用户是否具有对请求的用户功能的权限
 	 * @param userId 用户id
@@ -26,9 +28,22 @@ public interface UserService {
 	 * @param userAuthorityId 所请求的功能id
 	 * @return 0：不具有 1：具有 
 	 */
-	int userAuthenticate(Integer userId,Integer resourceId,Integer userAuthorityId);
-	
+	int userAuthenticate(Integer userId, Integer resourceId, Integer userAuthorityId);
+
 	UserThis findUserById(Integer userId);
-	
-	
+
+	/**
+	 * description: 查找某人的菜单项
+	 * @param userId
+	 * @return 菜单项拼接的字符串
+	 */
+	String findMenuById(Integer userId);
+
+	/**
+	 * description:查找某人所拥有的角色
+	 * @param userId
+	 * @return 
+	 */
+	List<Integer> findRoleById(Integer userId);
+
 }

@@ -1,5 +1,8 @@
 package edu.ynu.docmanagesystem.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -38,6 +41,16 @@ public class UserController {
 			state.setState("-2");
 		}
 		return state;
+	}
+
+	@RequestMapping("/menu")
+	public @ResponseBody Map<Object, Object> selectMenu() {
+		Subject subject = SecurityUtils.getSubject();
+		Integer userId = (Integer) subject.getPrincipal();
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("data", userService.findMenuById(userId));
+		return hashMap;
+
 	}
 
 }
