@@ -13,7 +13,7 @@ public interface DocService {
 	 * @param resourceDescribe
 	 * @return 资源id
 	 */
-	Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, Integer resourceTypeId,
+	Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, String formName,Integer resourceTypeId,
 	        String resourceDescribe, double size);
 
 	/**

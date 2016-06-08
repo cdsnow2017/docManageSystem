@@ -35,6 +35,7 @@
 				/js/** = anon
 				/public/** = anon
 				/user/login = anon
+				/doc/upload = authc
 				/user/menu = authc
 				<!-- 验证码，可匿名访问 -->
 				<!-- /validatecode.jsp = anon -->

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.shiro.SecurityUtils;
@@ -24,8 +23,7 @@ public class DocController {
 	private DocService docService;
 
 	@RequestMapping("/upload")
-	public Map<Object, Object> upLoad(HttpSession session, HttpServletRequest request, MultipartFile file)
-	        throws Exception {
+	public Map<Object, Object> upLoad(HttpServletRequest request, MultipartFile file) throws Exception {
 		Subject subject = SecurityUtils.getSubject();
 		Integer userId = (Integer) subject.getPrincipal();
 		String resourceDescribe = request.getParameter("resourceDescribe");
@@ -33,7 +31,8 @@ public class DocController {
 		String originalFilename = file.getOriginalFilename();
 		// 将上传的文件存储到数据库中
 		Integer resouceId = docService.storeFileToDB(userId, file.getBytes(), originalFilename,
-		        Integer.valueOf(resourceTypeId), resourceDescribe, file.getSize() / 1024.0);
+		        FilenameUtils.getExtension(originalFilename), Integer.valueOf(resourceTypeId), resourceDescribe,
+		        file.getSize() / 1024.0);
 		// 开启多线程后台转swf
 		Thread docTransferConcurrent = new DocTransferConcurrent(file.getInputStream(),
 		        FilenameUtils.getExtension(originalFilename), docService, resouceId);

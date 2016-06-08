@@ -28,8 +28,8 @@ public class DocServiceImpl implements DocService {
 	private final static String exePath = "I:/swftools/pdf2swf.exe";
 
 	@Override
-	public Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, Integer resourceTypeId,
-	        String resourceDescribe, double size) {
+	public Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, String formName,
+	        Integer resourceTypeId, String resourceDescribe, double size) {
 		ResourceWithBLOBs resource = new ResourceWithBLOBs();
 		resource.setUserid(userId);
 		resource.setContain(bytes);
@@ -37,7 +37,9 @@ public class DocServiceImpl implements DocService {
 		resource.setResourcetypeid(resourceTypeId);
 		resource.setDescribe(resourceDescribe);
 		resource.setSize(size);
-		return resourceMapper.insertSelective(resource);
+		resource.setFormname(formName);
+		resourceMapper.insertSelective(resource);
+		return resource.getResourceid();
 	}
 
 	@Override
@@ -87,7 +89,7 @@ public class DocServiceImpl implements DocService {
 		pro.waitFor();
 		// pro.destroy();
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(
-		        new FileInputStream(filePath + fileName + ".swf"));
+		        new FileInputStream(filePath + "/" + fileName + ".swf"));
 		return bufferedInputStream;
 	}
 

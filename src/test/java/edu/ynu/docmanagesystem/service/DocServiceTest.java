@@ -31,7 +31,7 @@ public class DocServiceTest extends AbstractTransactionalJUnit4SpringContextTest
 	public void testStoreFileToDB() {
 		byte[] bytes = "sdfsdfsd".getBytes();
 
-		System.out.println(docService.storeFileToDB(1, bytes, "哈哈", 1, "keyi", 3.5));
+//		System.out.println(docService.storeFileToDB(1, bytes, "哈哈", 1, "keyi", 3.5));
 
 	}
 
