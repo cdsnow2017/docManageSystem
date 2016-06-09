@@ -84,8 +84,7 @@
         location.href = "/login.html";
     })
 
-    app
-        .controller(
+    app.controller(
             'CheckMessageController',
             function($scope) {
                 $scope.data = "选课通知：选课将于16周开始，在16周选课之前，请大家先完成评教工作。评教系统将于12月10日（星期二）下午5：30关闭，请大家俺是完成，并确认已扣缴学费或已办理缓交学费，方可选课。";
