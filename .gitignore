@@ -39,10 +39,10 @@ hs_err_pid*
 target/**
 
 #忽略
-.sass-cache/**
+.sass-cache/
 
 #忽略
-node_modules/**
+node_modules/
 
 
 #保留文件夹
