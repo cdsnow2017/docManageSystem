@@ -45,5 +45,9 @@ public interface UserService {
 	 * @return 
 	 */
 	List<Integer> findRoleById(Integer userId);
+	
+	
+	
+
 
 }

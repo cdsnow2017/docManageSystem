@@ -2,6 +2,9 @@ package edu.ynu.docmanagesystem.service;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+
+import edu.ynu.docmanagesystem.poExtend.DocList;
 
 public interface DocService {
 
@@ -13,8 +16,8 @@ public interface DocService {
 	 * @param resourceDescribe
 	 * @return 资源id
 	 */
-	Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, Integer resourceTypeId,
-	        String resourceDescribe, double size);
+	Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, String formName,
+	        Integer resourceTypeId, String resourceDescribe, double size);
 
 	/**
 	 * description: 转换文档为PDF
@@ -38,5 +41,13 @@ public interface DocService {
 	 * @return 
 	 */
 	Integer insertSwfToDb(byte[] swf, Integer resourceId);
+
+	/**
+	 * description: 返回所有符合条件的资源列表
+	 * @param sectionId 部门 Id
+	 * @param resouceType 资源类型
+	 * @return 资源列表
+	 */
+	List<DocList> findAllresouceList(Integer sectionId, Integer resouceType);
 
 }

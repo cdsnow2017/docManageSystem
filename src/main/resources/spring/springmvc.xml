@@ -31,6 +31,14 @@
 	<!-- 开启注解，注册注解映射器和适配器，提供数据绑定和json解析支持等 -->
 	<mvc:annotation-driven />
 
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为50MB -->
+		<property name="maxUploadSize">
+			<value>52428800</value>
+		</property>
+	</bean>
+
 
 
 
