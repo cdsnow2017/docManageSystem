@@ -134,10 +134,18 @@
         }
     });
 
+
     app.controller('simpleDocController', function($scope, $http) {
-        var url = window.location.search;
-        var num = url.substring(url.lastIndexOf('=') + 1, url.length);
-        console.log(num);
+    	 var url = window.location.toString();
+         var num = url.substring(url.lastIndexOf('=') + 1, url.length);
+         $scope.resNum = num;
+         $scope.data = {
+             "title": "关于2013年秋季学期学生选课",
+             "readNum": 16,
+             "downloadNum": 20,
+             "describe": "大家好！这是人事部2016年秋季招聘名单",
+             "SWFFile": "2.swf",
+         };
 
         var startDocument = "Paper";
         $('#documentViewer').FlexPaperViewer({
@@ -167,15 +175,8 @@
             }
         });
 
-        $scope.resNum = num;
-        $scope.data = {
-            "title": "关于2013年秋季学期学生选课",
-            "readNum": 16,
-            "downloadNum": 20,
-            "describe": "大家好！这是人事部2016年秋季招聘名单",
-            "SWFFile": "2.swf",
-        };
-        $http({
+   
+      /*  $http({
             url: "/user/menu",
             method: "GET",
             params: {
@@ -187,7 +188,7 @@
 
         }).error(function(response) {
             console.log("cuowu");
-        })
+        })*/
     });
 
     /*app.controller('companyDocListController',
