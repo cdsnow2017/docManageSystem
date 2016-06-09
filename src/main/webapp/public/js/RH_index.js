@@ -134,239 +134,239 @@
         }
     });
 
-    app.controller('simpleDocController', function($scope, $http) {
-        var url = window.location.search;
-        var num = url.substring(url.lastIndexOf('=') + 1, url.length);
-        console.log(num);
+    // app.controller('simpleDocController', function($scope, $http) {
+    //     var url = window.location.search;
+    //     var num = url.substring(url.lastIndexOf('=') + 1, url.length);
+    //     console.log(num);
 
-        var startDocument = "Paper";
-        $('#documentViewer').FlexPaperViewer({
-            config: {
-                SWFFile: $scope.data.SWFFile,
-                Scale: 1.0,
-                ZoomTransition: 'easeOut',
-                ZoomTime: 0.5,
-                ZoomInterval: 0.2,
-                FitPageOnLoad: true,
-                FitWidthOnLoad: true,
-                FullScreenAsMaxWindow: false,
-                ProgressiveLoading: false,
-                MinZoomSize: 0.2,
-                MaxZoomSize: 5,
-                SearchMatchAll: false,
-                InitViewMode: 'Portrait',
-                RenderingOrder: 'flash',
-                StartAtPage: '',
-                ViewModeToolsVisible: true,
-                ZoomToolsVisible: true,
-                NavToolsVisible: true,
-                CursorToolsVisible: true,
-                SearchToolsVisible: true,
-                WMode: 'window',
-                localeChain: 'en_US'
-            }
-        });
+    //     var startDocument = "Paper";
+    //     $('#documentViewer').FlexPaperViewer({
+    //         config: {
+    //             SWFFile: $scope.data.SWFFile,
+    //             Scale: 1.0,
+    //             ZoomTransition: 'easeOut',
+    //             ZoomTime: 0.5,
+    //             ZoomInterval: 0.2,
+    //             FitPageOnLoad: true,
+    //             FitWidthOnLoad: true,
+    //             FullScreenAsMaxWindow: false,
+    //             ProgressiveLoading: false,
+    //             MinZoomSize: 0.2,
+    //             MaxZoomSize: 5,
+    //             SearchMatchAll: false,
+    //             InitViewMode: 'Portrait',
+    //             RenderingOrder: 'flash',
+    //             StartAtPage: '',
+    //             ViewModeToolsVisible: true,
+    //             ZoomToolsVisible: true,
+    //             NavToolsVisible: true,
+    //             CursorToolsVisible: true,
+    //             SearchToolsVisible: true,
+    //             WMode: 'window',
+    //             localeChain: 'en_US'
+    //         }
+    //     });
 
-        $scope.resNum = num;
-        $scope.data = {
-            "title": "关于2013年秋季学期学生选课",
-            "readNum": 16,
-            "downloadNum": 20,
-            "describe": "大家好！这是人事部2016年秋季招聘名单",
-            "SWFFile": "2.swf",
-        };
-        $http({
-            url: "/user/menu",
-            method: "GET",
-            params: {
-                num : $scope.resNum
-            }
-        }).success(function(response) {
+    //     $scope.resNum = num;
+    //     $scope.data = {
+    //         "title": "关于2013年秋季学期学生选课",
+    //         "readNum": 16,
+    //         "downloadNum": 20,
+    //         "describe": "大家好！这是人事部2016年秋季招聘名单",
+    //         "SWFFile": "2.swf",
+    //     };
+    //     $http({
+    //         url: "/user/menu",
+    //         method: "GET",
+    //         params: {
+    //             num : $scope.resNum
+    //         }
+    //     }).success(function(response) {
 
-            $scope.data = response.data;
+    //         $scope.data = response.data;
 
-        }).error(function(response) {
-            console.log("cuowu");
-        })
-    });
+    //     }).error(function(response) {
+    //         console.log("cuowu");
+    //     })
+    // });
 
-    /*app.controller('companyDocListController',
-            function($http, $scope, setPage) {
-                // setPage.init(5,alert);
-                // 每页显示的条数
-                $scope.num = 5;
-                // 分页数
-                var currentPage = 1;
-                $scope.totalNum = 0;
+    // app.controller('companyDocListController',
+    //         function($http, $scope, setPage) {
+    //             // setPage.init(5,alert);
+    //             // 每页显示的条数
+    //             $scope.num = 5;
+    //             // 分页数
+    //             var currentPage = 1;
+    //             $scope.totalNum = 0;
 
-                // 显示内容
-                $scope.data = [ {
-                    name : "angular实战",
-                    type : "工作计划",
-                    uploadTime : "2016-01-17",
-                    updateTime : "2016-01-17",
-                    author : "sr",
-                    section : "人事部"
-                }, {
-                    name : "css实战",
-                    type : "工作计划",
-                    uploadTime : "2016-01-17",
-                    updateTime : "2016-01-17",
-                    author : "sr",
-                    section : "人事部"
-                }, {
-                    name : "angular实战",
-                    type : "工作计划",
-                    uploadTime : "2016-01-17",
-                    updateTime : "2016-01-17",
-                    author : "sr",
-                    section : "人事部"
-                }, {
-                    name : "HTML实战",
-                    type : "工作计划",
-                    uploadTime : "2016-01-17",
-                    updateTime : "2016-01-17",
-                    author : "sr",
-                    section : "人事部"
-                }, {
-                    name : "angular实战",
-                    type : "工作计划",
-                    uploadTime : "2016-01-17",
-                    updateTime : "2016-01-17",
-                    author : "sr",
-                    section : "人事部"
-                }, ];
-                $http({
-                    url : "",
-                    method : "GET",
-                    params : {
-                        num : $scope.num
-                    }
-                }).success(function(response) {
-                    $scope.totalNum = response.data;
-                    setPage($scope.totalNum, $scope.getData);
+    //             // 显示内容
+    //             $scope.data = [ {
+    //                 name : "angular实战",
+    //                 type : "工作计划",
+    //                 uploadTime : "2016-01-17",
+    //                 updateTime : "2016-01-17",
+    //                 author : "sr",
+    //                 section : "人事部"
+    //             }, {
+    //                 name : "css实战",
+    //                 type : "工作计划",
+    //                 uploadTime : "2016-01-17",
+    //                 updateTime : "2016-01-17",
+    //                 author : "sr",
+    //                 section : "人事部"
+    //             }, {
+    //                 name : "angular实战",
+    //                 type : "工作计划",
+    //                 uploadTime : "2016-01-17",
+    //                 updateTime : "2016-01-17",
+    //                 author : "sr",
+    //                 section : "人事部"
+    //             }, {
+    //                 name : "HTML实战",
+    //                 type : "工作计划",
+    //                 uploadTime : "2016-01-17",
+    //                 updateTime : "2016-01-17",
+    //                 author : "sr",
+    //                 section : "人事部"
+    //             }, {
+    //                 name : "angular实战",
+    //                 type : "工作计划",
+    //                 uploadTime : "2016-01-17",
+    //                 updateTime : "2016-01-17",
+    //                 author : "sr",
+    //                 section : "人事部"
+    //             }, ];
+    //             $http({
+    //                 url : "",
+    //                 method : "GET",
+    //                 params : {
+    //                     num : $scope.num
+    //                 }
+    //             }).success(function(response) {
+    //                 $scope.totalNum = response.data;
+    //                 setPage($scope.totalNum, $scope.getData);
 
-                }).error(function(response) {
-                    console.log("妈比");
-                })
+    //             }).error(function(response) {
+    //                 console.log("妈比");
+    //             })
 
-                $scope.getData = function(page) {
-                    currentPage = page;
-                    $http({
-                        url : "",
-                        method : "GET",
-                        params : {
-                            pageNum : page
-                        }
-                    }).success(function(response) {
-                        $scope.data = response.data;
-                    }).error(function(response) {
-                        console.log("妈比");
-                    })
+    //             $scope.getData = function(page) {
+    //                 currentPage = page;
+    //                 $http({
+    //                     url : "",
+    //                     method : "GET",
+    //                     params : {
+    //                         pageNum : page
+    //                     }
+    //                 }).success(function(response) {
+    //                     $scope.data = response.data;
+    //                 }).error(function(response) {
+    //                     console.log("妈比");
+    //                 })
 
-                }
-                $scope.prePage = function() {
-                    if (currentPage !== 1) {
-                        $scope.page($scope.getData(currentPage - 1));
-                    }
-                }
-                $scope.lastPage = function() {
-                    if (currentPage !== $scope.totalNum) {
-                        $scope.page($scope.getData(currentPage + 1));
-                    }
-                }
-                $scope.getData(1);
-            });
+    //             }
+    //             $scope.prePage = function() {
+    //                 if (currentPage !== 1) {
+    //                     $scope.page($scope.getData(currentPage - 1));
+    //                 }
+    //             }
+    //             $scope.lastPage = function() {
+    //                 if (currentPage !== $scope.totalNum) {
+    //                     $scope.page($scope.getData(currentPage + 1));
+    //                 }
+    //             }
+    //             $scope.getData(1);
+    //         });
 
-    app.controller('docListController', function($http, $scope, setPage) {
-        // setPage.init(5,alert);
-        // 每页显示的条数
-        $scope.num = 5;
-        var currentPage = 1;
-        // 分页数
-        $scope.totalNum = 0;
+    // app.controller('docListController', function($http, $scope, setPage) {
+    //     // setPage.init(5,alert);
+    //     // 每页显示的条数
+    //     $scope.num = 5;
+    //     var currentPage = 1;
+    //     // 分页数
+    //     $scope.totalNum = 0;
 
-        // 显示内容
-        $scope.data = [ {
-            name : "angular实战",
-            uploadTime : "2016-01-17",
-            section : "人事部",
-            author : "sr"
-        }, {
-            name : "angular实战",
-            uploadTime : "2016-01-17",
-            section : "人事部",
-            author : "sr"
-        }, {
-            name : "angular实战",
-            uploadTime : "2016-01-17",
-            section : "人事部",
-            author : "sr"
-        }, {
-            name : "angular实战",
-            uploadTime : "2016-01-17",
-            section : "人事部",
-            author : "sr"
-        }, ];
-        $http({
-            url : "",
-            method : "GET",
-            params : {
-                num : $scope.num
-            }
-        }).success(function(response) {
-            $scope.totalNum = response.data;
-            setPage($scope.totalNum, $scope.getData);
+    //     // 显示内容
+    //     $scope.data = [ {
+    //         name : "angular实战",
+    //         uploadTime : "2016-01-17",
+    //         section : "人事部",
+    //         author : "sr"
+    //     }, {
+    //         name : "angular实战",
+    //         uploadTime : "2016-01-17",
+    //         section : "人事部",
+    //         author : "sr"
+    //     }, {
+    //         name : "angular实战",
+    //         uploadTime : "2016-01-17",
+    //         section : "人事部",
+    //         author : "sr"
+    //     }, {
+    //         name : "angular实战",
+    //         uploadTime : "2016-01-17",
+    //         section : "人事部",
+    //         author : "sr"
+    //     }, ];
+    //     $http({
+    //         url : "",
+    //         method : "GET",
+    //         params : {
+    //             num : $scope.num
+    //         }
+    //     }).success(function(response) {
+    //         $scope.totalNum = response.data;
+    //         setPage($scope.totalNum, $scope.getData);
 
-        }).error(function(response) {
-            console.log("something wrong with docList init");
-        })
+    //     }).error(function(response) {
+    //         console.log("something wrong with docList init");
+    //     })
 
-        $scope.getData = function(page) {
-            currentPage = page;
-            $http({
-                url : "",
-                method : "GET",
-                params : {
-                    pageNum : page
-                }
-            }).success(function(response) {
-                $scope.data = response.data;
-            }).error(function(response) {
-                console.log("something wrong with getData");
-            })
+    //     $scope.getData = function(page) {
+    //         currentPage = page;
+    //         $http({
+    //             url : "",
+    //             method : "GET",
+    //             params : {
+    //                 pageNum : page
+    //             }
+    //         }).success(function(response) {
+    //             $scope.data = response.data;
+    //         }).error(function(response) {
+    //             console.log("something wrong with getData");
+    //         })
 
-        }
+    //     }
 
-        $scope.searchRes = function() {
-            $http({
-                url : "",
-                method : "GET",
-                params : {
-                    num : $scope.num,
-                    name : $scope.name,
-                    status : $scope.status,
-                }
-            }).success(function(response) {
-                $scope.totalNum = response.data;
-                setPage($scope.totalNum, $scope.getData);
+    //     $scope.searchRes = function() {
+    //         $http({
+    //             url : "",
+    //             method : "GET",
+    //             params : {
+    //                 num : $scope.num,
+    //                 name : $scope.name,
+    //                 status : $scope.status,
+    //             }
+    //         }).success(function(response) {
+    //             $scope.totalNum = response.data;
+    //             setPage($scope.totalNum, $scope.getData);
 
-            }).error(function(response) {
-                console.log("something wrong with searchRes");
-            })
-        }
+    //         }).error(function(response) {
+    //             console.log("something wrong with searchRes");
+    //         })
+    //     }
 
-        $scope.prePage = function() {
-            if (currentPage !== 1) {
-                $scope.getData(currentPage - 1);
-            }
-        }
-        $scope.lastPage = function() {
-            if (currentPage !== $scope.totalNum) {
-                $scope.getData(currentPage + 1);
-            }
-        }
-        $scope.getData(1);
-    });*/
+    //     $scope.prePage = function() {
+    //         if (currentPage !== 1) {
+    //             $scope.getData(currentPage - 1);
+    //         }
+    //     }
+    //     $scope.lastPage = function() {
+    //         if (currentPage !== $scope.totalNum) {
+    //             $scope.getData(currentPage + 1);
+    //         }
+    //     }
+    //     $scope.getData(1);
+    // });
 
 }(angular, window);

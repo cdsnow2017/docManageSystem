@@ -47,6 +47,9 @@
                                     </div>
                                 </div>
                                 <script type="text/javascript">
+                                var url = window.location.toString();
+                                var num = url.substring(url.lastIndexOf('=') + 1, url.length);
+                                alert(num);
                                 /*var startDocument = "Paper";
                                 $('#documentViewer').FlexPaperViewer({
                                     config: {
