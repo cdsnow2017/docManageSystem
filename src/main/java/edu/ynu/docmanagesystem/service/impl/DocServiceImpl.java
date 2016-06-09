@@ -6,6 +6,8 @@ import java.io.InputStream;
 
 import java.io.OutputStream;
 import java.net.ConnectException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,11 @@ import com.artofsolving.jodconverter.DocumentFormat;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
+
 import edu.ynu.docmanagesystem.mapper.ResourceMapper;
+import edu.ynu.docmanagesystem.mapperExtend.DocExtendMapper;
 import edu.ynu.docmanagesystem.po.ResourceWithBLOBs;
+import edu.ynu.docmanagesystem.poExtend.DocList;
 import edu.ynu.docmanagesystem.service.DocService;
 
 @Service
@@ -24,6 +29,9 @@ public class DocServiceImpl implements DocService {
 
 	@Autowired
 	private ResourceMapper resourceMapper;
+
+	@Autowired
+	private DocExtendMapper docExtendMapper;
 
 	private final static String exePath = "I:/swftools/pdf2swf.exe";
 
@@ -105,6 +113,12 @@ public class DocServiceImpl implements DocService {
 	private static boolean isWindowsSystem() {
 		String p = System.getProperty("os.name");
 		return p.toLowerCase().indexOf("windows") >= 0 ? true : false;
+	}
+
+	@Override
+	public List<DocList> findAllresouceList(Integer sectionId, Integer resouceType) {
+		return docExtendMapper.findAllresouceList(sectionId, resouceType);
+
 	}
 
 }

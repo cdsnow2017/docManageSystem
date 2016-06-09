@@ -1,6 +1,7 @@
 package edu.ynu.docmanagesystem.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,10 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.ynu.docmanagesystem.poExtend.DocList;
 import edu.ynu.docmanagesystem.service.DocService;
 import edu.ynu.docmanagesystem.util.DocTransferConcurrent;
 
@@ -41,6 +44,17 @@ public class DocController {
 		// 返回资源id
 		map.put("state", resouceId);
 		return map;
+	}
+
+	@RequestMapping("/findDocList")
+	@ResponseBody
+	public Map<Object, Object> findDocList(Integer sectionId, Integer resouceType) {
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("data", docService.findAllresouceList(sectionId, resouceType));
+		return hashMap;
+		
+		
+
 	}
 
 }
