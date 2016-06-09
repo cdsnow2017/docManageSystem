@@ -12,14 +12,14 @@
                         <!-- 每个form元素需用form-group包裹 -->
                         <div class="form-group bg-success">
                             <div class="col-md-offset-2">
-                                <h3>标题:关于2013年秋季学期学生选课通知</h3></div>
+                                <h3>标题:{{data.title}}</h3></div>
                         </div>
                         <div class="form-group bg-info">
                             <div class="row" style="padding-left: 30px">
                                 <label for="exampleInputFile1">
-                                    <h5>查看人数:15</h5></label>
+                                    <h5>查看人数:{{data.readNum}}</h5></label>
                                 <label for="exampleInputFile2">
-                                    <h5>下载人数:6</h5></label>
+                                    <h5>下载人数:{{data.downloadNum}}</h5></label>
                                 <label for="exampleInputFile2">
                                     <h5>暂无评论</h5></label>
                             </div>
@@ -27,12 +27,7 @@
                         <div class="form-group bg-warning">
                             <div class="row" style="padding-left: 30px">
                                 <label for="exampleInputFile1">
-                                    <h5>说明:</h5> 大家好！这是人事部2016年秋季招聘名单</label>
-                            </div>
-                        </div>
-                        <div class="form-group bg-warning">
-                            <div class="row" style="padding-left: 30px">
-                            {{text}}
+                                    <h5>说明:</h5> {{data.describe}}</label>
                             </div>
                         </div>
                         <div class="from-group">
@@ -52,7 +47,33 @@
                                     </div>
                                 </div>
                                 <script type="text/javascript">
-                                // var startDocument = "Paper"; // $('#documentViewer').FlexPaperViewer({ // config : { // SWFFile : '2.swf', // Scale : 1.0, // ZoomTransition : 'easeOut', // ZoomTime : 0.5, // ZoomInterval : 0.2, // FitPageOnLoad : true, // FitWidthOnLoad : true, // FullScreenAsMaxWindow : false, // ProgressiveLoading : false, // MinZoomSize : 0.2, // MaxZoomSize : 5, // SearchMatchAll : false, // InitViewMode : 'Portrait', // RenderingOrder : 'flash', // StartAtPage : '', // ViewModeToolsVisible : true, // ZoomToolsVisible : true, // NavToolsVisible : true, // CursorToolsVisible : true, // SearchToolsVisible : true, // WMode : 'window', // localeChain : 'en_US' // } // });
+                                /*var startDocument = "Paper";
+                                $('#documentViewer').FlexPaperViewer({
+                                    config: {
+                                        SWFFile: '2.swf',
+                                        Scale: 1.0,
+                                        ZoomTransition: 'easeOut',
+                                        ZoomTime: 0.5,
+                                        ZoomInterval: 0.2,
+                                        FitPageOnLoad: true,
+                                        FitWidthOnLoad: true,
+                                        FullScreenAsMaxWindow: false,
+                                        ProgressiveLoading: false,
+                                        MinZoomSize: 0.2,
+                                        MaxZoomSize: 5,
+                                        SearchMatchAll: false,
+                                        InitViewMode: 'Portrait',
+                                        RenderingOrder: 'flash',
+                                        StartAtPage: '',
+                                        ViewModeToolsVisible: true,
+                                        ZoomToolsVisible: true,
+                                        NavToolsVisible: true,
+                                        CursorToolsVisible: true,
+                                        SearchToolsVisible: true,
+                                        WMode: 'window',
+                                        localeChain: 'en_US'
+                                    }
+                                });*/
                                 </script>
                             </div>
                         </div>
