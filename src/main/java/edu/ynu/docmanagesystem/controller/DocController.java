@@ -1,5 +1,6 @@
 package edu.ynu.docmanagesystem.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.ynu.docmanagesystem.poExtend.DocDetail;
 import edu.ynu.docmanagesystem.poExtend.DocList;
 import edu.ynu.docmanagesystem.service.DocService;
 import edu.ynu.docmanagesystem.util.DocTransferConcurrent;
@@ -26,7 +28,7 @@ public class DocController {
 	private DocService docService;
 
 	@RequestMapping("/upload")
-	public Map<Object, Object> upLoad(HttpServletRequest request, MultipartFile file) throws Exception {
+	public String upLoad(HttpServletRequest request, MultipartFile file) throws Exception {
 		Subject subject = SecurityUtils.getSubject();
 		Integer userId = (Integer) subject.getPrincipal();
 		String resourceDescribe = request.getParameter("resourceDescribe");
@@ -40,10 +42,7 @@ public class DocController {
 		Thread docTransferConcurrent = new DocTransferConcurrent(file.getInputStream(),
 		        FilenameUtils.getExtension(originalFilename), docService, resouceId);
 		docTransferConcurrent.start();
-		Map<Object, Object> map = new HashMap<>();
-		// 返回资源id
-		map.put("state", resouceId);
-		return map;
+		return "redirect:/index.html#/docList";
 	}
 
 	@RequestMapping("/findDocList")
@@ -52,9 +51,12 @@ public class DocController {
 		HashMap<Object, Object> hashMap = new HashMap<>();
 		hashMap.put("data", docService.findAllresouceList(sectionId, resouceType));
 		return hashMap;
-		
-		
+	}
 
+	@RequestMapping("/viewDocDetail")
+	@ResponseBody
+	public DocDetail viewDocDetail(Integer resourceId) throws IOException {
+		return docService.findDocDetailById(resourceId);
 	}
 
 }

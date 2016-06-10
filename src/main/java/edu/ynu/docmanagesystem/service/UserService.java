@@ -12,24 +12,6 @@ import edu.ynu.docmanagesystem.po.UserThis;
  */
 public interface UserService {
 
-	/**
-	 * description:登录验证
-	 * @param userId 用户id
-	 * @param password 密码
-	 * @param roleId 选择的登录角色id
-	 * @return -1：用户不存在  1：登录成功  0：用户无此角色权限 -2：密码错误
-	 */
-	int loginVerify(Integer userId, String password, Integer roleId);
-
-	/**
-	 * description: 验证用户是否具有对请求的用户功能的权限
-	 * @param userId 用户id
-	 * @param resourceId 资源id
-	 * @param userAuthorityId 所请求的功能id
-	 * @return 0：不具有 1：具有 
-	 */
-	int userAuthenticate(Integer userId, Integer resourceId, Integer userAuthorityId);
-
 	UserThis findUserById(Integer userId);
 
 	/**
@@ -45,9 +27,12 @@ public interface UserService {
 	 * @return 
 	 */
 	List<Integer> findRoleById(Integer userId);
-	
-	
-	
 
+	/**
+	 * description:查找某人的所有授权，返回字符串格式为shiro格式
+	 * @param userId
+	 * @return 
+	 */
+	List<String> findShiroPermissionById(Integer userId);
 
 }

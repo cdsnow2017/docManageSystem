@@ -44,6 +44,11 @@ target/**
 #忽略
 node_modules/
 
+#忽略
+tmp/
+
+
+
 
 #保留文件夹
 !.gitkeep

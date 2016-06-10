@@ -1,9 +1,12 @@
 package edu.ynu.docmanagesystem.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import edu.ynu.docmanagesystem.poExtend.DocDetail;
 import edu.ynu.docmanagesystem.poExtend.DocList;
 
 public interface DocService {
@@ -49,5 +52,20 @@ public interface DocService {
 	 * @return 资源列表
 	 */
 	List<DocList> findAllresouceList(Integer sectionId, Integer resouceType);
+
+	/**
+	 * description: 增加阅读次数
+	 * @param resouceId 
+	 */
+	void updateViewCount(Integer resouceId);
+
+	/**
+	 * description: 查询文档的详细信息
+	 * @param resouceId
+	 * @return 
+	 * @throws FileNotFoundException 
+	 * @throws IOException 
+	 */
+	DocDetail findDocDetailById(Integer resouceId) throws IOException;
 
 }
