@@ -19,13 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.ynu.docmanagesystem.poExtend.DocDetail;
 import edu.ynu.docmanagesystem.poExtend.DocList;
 import edu.ynu.docmanagesystem.service.DocService;
+import edu.ynu.docmanagesystem.service.UserService;
 import edu.ynu.docmanagesystem.util.DocTransferConcurrent;
+import edu.ynu.docmanagesystem.util.LogType;
 
 @Controller
 @RequestMapping(value = "/doc")
 public class DocController {
 	@Autowired
 	private DocService docService;
+
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/upload")
 	public String upLoad(HttpServletRequest request, MultipartFile file) throws Exception {
@@ -35,13 +40,14 @@ public class DocController {
 		String resourceTypeId = request.getParameter("resourceTypeId");
 		String originalFilename = file.getOriginalFilename();
 		// 将上传的文件存储到数据库中
-		Integer resouceId = docService.storeFileToDB(userId, file.getBytes(), originalFilename,
+		Integer resourceId = docService.storeFileToDB(userId, file.getBytes(), originalFilename,
 		        FilenameUtils.getExtension(originalFilename), Integer.valueOf(resourceTypeId), resourceDescribe,
 		        file.getSize() / 1024.0);
 		// 开启多线程后台转swf
 		Thread docTransferConcurrent = new DocTransferConcurrent(file.getInputStream(),
-		        FilenameUtils.getExtension(originalFilename), docService, resouceId);
+		        FilenameUtils.getExtension(originalFilename), docService, resourceId);
 		docTransferConcurrent.start();
+		userService.insertLog(userId, resourceId, LogType.upload);
 		return "redirect:/index.html#/docList";
 	}
 
@@ -56,6 +62,10 @@ public class DocController {
 	@RequestMapping("/viewDocDetail")
 	@ResponseBody
 	public DocDetail viewDocDetail(Integer resourceId) throws IOException {
+		Subject subject = SecurityUtils.getSubject();
+		Integer userId = (Integer) subject.getPrincipal();
+		userService.insertLog(userId, resourceId, LogType.read);
+		docService.updateViewCount(resourceId);
 		return docService.findDocDetailById(resourceId);
 	}
 

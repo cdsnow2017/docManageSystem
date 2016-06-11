@@ -159,6 +159,5 @@ public class DocServiceImpl implements DocService {
 		bufferedOutputStream.close();
 		findDocDetailById.setSwfPath("tmp/" + swfFileTmpName + ".swf");
 		return findDocDetailById;
-
 	}
 }

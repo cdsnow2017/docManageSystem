@@ -55,7 +55,7 @@
 			tableName="user_role"></table> <table tableName="userauthority"></table> 
 			<table tableName="role_menu"></table> -->
 		<!-- <table tableName="section_userauthority_resourcetype"> </table> -->
-		<table tableName="section"></table>
+		<table tableName="user_resource_log"></table>
 
 	</context>
 </generatorConfiguration>

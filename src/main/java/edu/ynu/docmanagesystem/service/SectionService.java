@@ -1,13 +1,6 @@
 package edu.ynu.docmanagesystem.service;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-
-import edu.ynu.docmanagesystem.poExtend.DocDetail;
-import edu.ynu.docmanagesystem.poExtend.DocList;
+import java.util.Map;
 
 public interface SectionService {
 
@@ -30,5 +23,7 @@ public interface SectionService {
 	 */
 	void deleteSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
 	        Boolean isCascade);
+
+	Map<Object, Object> sectionCountStatistics();
 
 }

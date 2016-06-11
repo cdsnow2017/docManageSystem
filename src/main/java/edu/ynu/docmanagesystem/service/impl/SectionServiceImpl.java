@@ -1,6 +1,11 @@
 package edu.ynu.docmanagesystem.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,8 +13,10 @@ import edu.ynu.docmanagesystem.mapper.SectionMapper;
 import edu.ynu.docmanagesystem.mapper.SectionUserauthorityResourcetypeMapper;
 import edu.ynu.docmanagesystem.mapperExtend.SectionExtendMapper;
 import edu.ynu.docmanagesystem.po.Section;
+import edu.ynu.docmanagesystem.po.SectionExample;
 import edu.ynu.docmanagesystem.po.SectionUserauthorityResourcetype;
 import edu.ynu.docmanagesystem.po.SectionUserauthorityResourcetypeKey;
+import edu.ynu.docmanagesystem.poExtend.SectionCount;
 import edu.ynu.docmanagesystem.service.SectionService;
 
 @Service
@@ -64,6 +71,26 @@ public class SectionServiceImpl implements SectionService {
 				sectionUserauthorityResourcetypeMapper.deleteByPrimaryKey(key);
 			}
 		}
+	}
+
+	@Override
+	public Map<Object, Object> sectionCountStatistics() {
+		SectionExample sectionExample = new SectionExample();
+		sectionExample.or().andSectionidIsNotNull();
+		List<Section> allSections = sectionMapper.selectByExample(sectionExample);
+		ArrayList<SectionCount> nameValues = new ArrayList<>();
+		for (Section section : allSections) {
+			SectionCount sectionCount = new SectionCount();
+			sectionCount.setName(section.getSectiondescribe());
+			sectionCount.setValue(sectionExtendMapper.selectDocCountOneSection(section.getSectionid()));
+			nameValues.add(sectionCount);
+		}
+		List<String> names = allSections.stream().map(e -> e.getSectiondescribe()).collect(Collectors.toList());
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("names", names);
+		hashMap.put("nameValues", nameValues);
+		return hashMap;
+
 	}
 
 }

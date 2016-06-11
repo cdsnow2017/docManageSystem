@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.ynu.docmanagesystem.poExtend.State;
 import edu.ynu.docmanagesystem.poExtend.UserExtend;
+import edu.ynu.docmanagesystem.service.SectionService;
 import edu.ynu.docmanagesystem.service.UserService;
 import edu.ynu.docmanagesystem.util.BeanFactory;
 
@@ -25,23 +26,26 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private SectionService sectionService;
+
 	@RequestMapping("/login")
 	public @ResponseBody State login(@RequestBody UserExtend user) throws Exception {
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserid() + "", user.getPassword());
-		//登录成功返回1
+		// 登录成功返回1
 		State state = BeanFactory.getState("1");
 		try {
 			subject.login(token);
 		} catch (UnknownAccountException e) {
-			//用户名不存在
+			// 用户名不存在
 			state.setState("-1");
 
 		} catch (IncorrectCredentialsException e) {
-			//密码错误
+			// 密码错误
 			state.setState("0");
 		} catch (Exception e) {
-			//其他错误
+			// 其他错误
 			state.setState("-2");
 		}
 		return state;
@@ -55,6 +59,16 @@ public class UserController {
 		hashMap.put("data", userService.findMenuById(userId));
 		return hashMap;
 
+	}
+
+	@RequestMapping("/userOperationCountStatistics")
+	public @ResponseBody Map<Object, Object> userOperationCountStatistics() {
+		return userService.userOperationCountStatistics();
+	}
+
+	@RequestMapping("/sectionCountStatistics")
+	public @ResponseBody Map<Object, Object> sectionCountStatistics() {
+		return sectionService.sectionCountStatistics();
 	}
 
 }

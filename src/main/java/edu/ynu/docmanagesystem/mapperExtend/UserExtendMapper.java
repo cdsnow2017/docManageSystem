@@ -10,5 +10,9 @@ public interface UserExtendMapper {
 	List<PermissionShiroString> findShiroPermissionById(Integer sectionId);
 
 	Section findSectionByUserId(Integer userId);
+	
+	Integer selectOperationCountOneUser(Integer userId, String operation);
+	
+	List<Integer> selectAllUserId();
 
 }

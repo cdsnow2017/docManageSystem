@@ -51,13 +51,13 @@ public interface DocService {
 	 * @param resouceType 资源类型
 	 * @return 资源列表
 	 */
-	List<DocList> findAllresouceList(Integer sectionId, Integer resouceType);
+	List<DocList> findAllresouceList(Integer sectionId, Integer resourceType);
 
 	/**
 	 * description: 增加阅读次数
 	 * @param resouceId 
 	 */
-	void updateViewCount(Integer resouceId);
+	void updateViewCount(Integer resourceId);
 
 	/**
 	 * description: 查询文档的详细信息
@@ -66,6 +66,6 @@ public interface DocService {
 	 * @throws FileNotFoundException 
 	 * @throws IOException 
 	 */
-	DocDetail findDocDetailById(Integer resouceId) throws IOException;
+	DocDetail findDocDetailById(Integer resourceId) throws IOException;
 
 }

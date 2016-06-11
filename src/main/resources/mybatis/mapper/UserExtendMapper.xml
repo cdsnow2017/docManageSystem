@@ -21,7 +21,21 @@
 		where sectionId =  #{0}
 
 	</select>
+	
+	
+    <select id="selectAllUserId" resultType="Integer">
+       select userId
+       from user_this
 
+    </select>
+
+
+ <select id="selectOperationCountOneUser" resultType="Integer">
+       select count(*)
+       from user_resource_log
+       where userId = #{0} and operation = #{1}
+
+    </select>
 
 
 </mapper>

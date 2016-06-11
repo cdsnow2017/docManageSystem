@@ -1,6 +1,7 @@
 package edu.ynu.docmanagesystem.service;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.ynu.docmanagesystem.po.UserThis;
 
@@ -35,6 +36,10 @@ public interface UserService {
 	 */
 	List<String> findShiroPermissionById(Integer userId);
 
+	void insertLog(Integer userId, Integer resourceId, String operation);
+	
+	Map<Object, Object> userOperationCountStatistics();
+	
 	
 
 }
