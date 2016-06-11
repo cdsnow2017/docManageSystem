@@ -51,7 +51,7 @@
             // controller: "personalCenterController"
         }).when("/resManage", {
             templateUrl: "./public/template/resManage.html",
-            // controller: "UpLoadController"
+            controller: "resController"
         }).when("/autManage", {
             templateUrl: "./public/template/autManage.html",
             // controller: "UpLoadController"
@@ -95,15 +95,70 @@
         }
     });
 
+    app.controller('resController', function($scope, $http) {
+        $(document).ready(function() {
+            var table = $('#table_id').DataTable({
+                 // ajax: {
+                 //                //指定数据源
+                 //                url: "./"
+                 //            },
+                 //            //每页显示三条数据
+                 //            pageLength: 8,
+                 //            columns: [{
+                 //                "data": "docId"
+                 //            }, {
+                 //                "data": "docName"
+                 //            }, {
+                 //                "data": "uploadPerson"
+                 //            },{
+                 //                "data": "resourceTypeDescribe"
+                 //            }, {
+                 //                "data": "sectionName"
+                 //            }, {
+                 //                "data": "time"
+                 //            }],
+                "columnDefs": [{
+                                "visible": false,
+                                "targets": 0
+                            }]
+                });
+
+            $('#table_id tbody').on('click', 'tr', function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#button').click(function() {
+                // alert(table.row('.selected').cell().data());
+                $http({
+                        url: "./",
+                        method: "GET",
+                        params: {
+                            docName: table.row('.selected').cell().data()
+                        }
+                    }).success(function(response) {
+                        table.row('.selected').remove().draw(false);
+                    }).error(function(response) {
+                        alert('shabi');
+                    })
+                    // table.row('.selected').remove().draw(false);
+            });
+        });
+    });
 
 
-    app.controller('chartController', function($scope,$http) {
+
+    app.controller('chartController', function($scope, $http) {
 
         $http({
             url: "./",
             method: "GET",
             params: {
-                
+
             }
         }).success(function(response) {
 
