@@ -2,18 +2,13 @@
     <div class="panel panel-primary">
         <div class="panel-heading" style="margin-top: 10px">
             <div class="panel-title">
-                <h1>文档在线预览系统</h1></div>
+                <h2>标题:{{data.title}}</h2></div>
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-md 12">
                     <!-- 水平排布 -->
                     <form class="form-horizontal" role="form">
-                        <!-- 每个form元素需用form-group包裹 -->
-                        <div class="form-group bg-success">
-                            <div class="col-md-offset-2">
-                                <h3>标题:{{data.title}}</h3></div>
-                        </div>
                         <div class="form-group bg-info">
                             <div class="row" style="padding-left: 30px">
                                 <label for="exampleInputFile1">
@@ -24,17 +19,11 @@
                                     <h5>暂无评论</h5></label>
                             </div>
                         </div>
-                        <div class="form-group bg-warning">
-                            <div class="row" style="padding-left: 30px">
-                                <label for="exampleInputFile1">
-                                    <h5>说明:</h5> {{data.describe}}</label>
-                            </div>
-                        </div>
                         <div class="from-group">
                             <div class="row">
                                 <div id="documentViewer" class="flexpaper_viewer col-md-9" style=" height: 540px; margin: 0;"></div>
                                 <div class="col-md-3">
-                                    <div class=" bg-danger" style="margin-top:30px;">
+                                    <div class=" bg-danger" style="margin-top:10px;">
                                         <address>
                                             <strong>cdsnow2017 && Jack Ren</strong>
                                             <br>
@@ -45,38 +34,14 @@
                                             <abbr title="Phone">P:</abbr> (123) 7758-521
                                         </address>
                                     </div>
+                                    <div class="bg-info" style="margin-top:10px;">
+                                        <label for="exampleInputFile1">
+                                            <h5>说明:</h5> {{data.describe}}</label>
+                                    </div>
                                 </div>
                                 <script type="text/javascript">
                                 var url = window.location.toString();
                                 var num = url.substring(url.lastIndexOf('=') + 1, url.length);
-                                alert(num);
-                                /*var startDocument = "Paper";
-                                $('#documentViewer').FlexPaperViewer({
-                                    config: {
-                                        SWFFile: '2.swf',
-                                        Scale: 1.0,
-                                        ZoomTransition: 'easeOut',
-                                        ZoomTime: 0.5,
-                                        ZoomInterval: 0.2,
-                                        FitPageOnLoad: true,
-                                        FitWidthOnLoad: true,
-                                        FullScreenAsMaxWindow: false,
-                                        ProgressiveLoading: false,
-                                        MinZoomSize: 0.2,
-                                        MaxZoomSize: 5,
-                                        SearchMatchAll: false,
-                                        InitViewMode: 'Portrait',
-                                        RenderingOrder: 'flash',
-                                        StartAtPage: '',
-                                        ViewModeToolsVisible: true,
-                                        ZoomToolsVisible: true,
-                                        NavToolsVisible: true,
-                                        CursorToolsVisible: true,
-                                        SearchToolsVisible: true,
-                                        WMode: 'window',
-                                        localeChain: 'en_US'
-                                    }
-                                });*/
                                 </script>
                             </div>
                         </div>

@@ -70,9 +70,15 @@
         }).when("/upload", {
             templateUrl: "./public/template/upload.html",
             // controller: "UpLoadController"
+        }).when("/QAPage", {
+            templateUrl: "./public/template/QAPage.html",
+            // controller: "UpLoadController"
         }).when("/simpleDoc", {
             templateUrl: "./public/template/simpleDoc.html",
             controller: "simpleDocController"
+        }).when("/chart", {
+            templateUrl: "./public/template/chart.html",
+            // controller: "simpleDocController"
 
         }).otherwise({
             redirectTo: "/index"
@@ -98,10 +104,13 @@
 
     app.controller('UpLoadController', function($scope, $http) {
         $scope.myboolean2 = true;
+        $scope.answer1 = true;
+        $scope.answer2 = true;
+        $scope.answer3 = true;
         $scope.data = {
             "resManage": true,
             "autManage": true,
-            "graph": true,
+            "graph": false,
             "doc": false
         };
         // $http({
@@ -132,21 +141,30 @@
         $scope.docData2 = function() {
             $scope.myboolean2 = !$scope.myboolean2;
         }
+        $scope.showAnswer1= function() {
+            $scope.answer1 = !$scope.answer1;
+        }
+        $scope.showAnswer2= function() {
+            $scope.answer2 = !$scope.answer2;
+        }
+        $scope.showAnswer3= function() {
+            $scope.answer3 = !$scope.answer3;
+        }
     });
 
 
 
     app.controller('simpleDocController', function($scope, $http) {
-    	 var url = window.location.toString();
-         var num = url.substring(url.lastIndexOf('=') + 1, url.length);
-         $scope.resNum = num;
-         $scope.data = {
-             "title": "关于2013年秋季学期学生选课",
-             "readNum": 16,
-             "downloadNum": 20,
-             "describe": "大家好！这是人事部2016年秋季招聘名单",
-             "SWFFile": "2.swf",
-         };
+        var url = window.location.toString();
+        var num = url.substring(url.lastIndexOf('=') + 1, url.length);
+        $scope.resNum = num;
+        $scope.data = {
+            "title": "关于2013年秋季学期学生选课",
+            "readNum": 16,
+            "downloadNum": 20,
+            "describe": "大家好！这是人事部2016年秋季招聘名单",
+            "SWFFile": "2.swf",
+        };
 
         var startDocument = "Paper";
         $('#documentViewer').FlexPaperViewer({
@@ -176,20 +194,20 @@
             }
         });
 
-   
-      /*  $http({
-            url: "/user/menu",
-            method: "GET",
-            params: {
-                num : $scope.resNum
-            }
-        }).success(function(response) {
 
-            $scope.data = response.data;
+          $http({
+              url: "/user/menu",
+              method: "GET",
+              params: {
+                  num : $scope.resNum
+              }
+          }).success(function(response) {
 
-        }).error(function(response) {
-            console.log("cuowu");
-        })*/
+              $scope.data = response.data;
+
+          }).error(function(response) {
+              console.log("cuowu");
+          })
     });
 
     /*app.controller('companyDocListController',
