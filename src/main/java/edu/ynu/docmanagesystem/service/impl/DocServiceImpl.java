@@ -1,18 +1,24 @@
 package edu.ynu.docmanagesystem.service.impl;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.artofsolving.jodconverter.DefaultDocumentFormatRegistry;
 import com.artofsolving.jodconverter.DocumentConverter;
+import com.artofsolving.jodconverter.DocumentFamily;
 import com.artofsolving.jodconverter.DocumentFormat;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
@@ -21,6 +27,7 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
 import edu.ynu.docmanagesystem.mapper.ResourceMapper;
 import edu.ynu.docmanagesystem.mapperExtend.DocExtendMapper;
 import edu.ynu.docmanagesystem.po.ResourceWithBLOBs;
+import edu.ynu.docmanagesystem.poExtend.DocDetail;
 import edu.ynu.docmanagesystem.poExtend.DocList;
 import edu.ynu.docmanagesystem.service.DocService;
 
@@ -33,7 +40,11 @@ public class DocServiceImpl implements DocService {
 	@Autowired
 	private DocExtendMapper docExtendMapper;
 
+	// swftools文件路径
 	private final static String exePath = "I:/swftools/pdf2swf.exe";
+
+	// 存放swf文件的临时文件夹路径，用于前台显示
+	private final static String swfTmp = "D:/我的文档/JavaEEWorkPlace/doc-main/src/main/webapp/tmp/";
 
 	@Override
 	public Integer storeFileToDB(Integer userId, byte[] bytes, String originalFilename, String formName,
@@ -54,6 +65,15 @@ public class DocServiceImpl implements DocService {
 	public void transferDocToPdf(InputStream inputStream, String extendName, OutputStream outputStream) {
 		OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
 		DefaultDocumentFormatRegistry defaultDocumentFormatRegistry = new DefaultDocumentFormatRegistry();
+		final DocumentFormat docx = new DocumentFormat("Microsoft Word docx", DocumentFamily.TEXT, "application/msword", "docx");
+		docx.setExportFilter(DocumentFamily.TEXT, "MS Word docx");
+		final DocumentFormat pptx = new DocumentFormat("Microsoft PowerPoint pptx", DocumentFamily.PRESENTATION, "application/vnd.ms-powerpoint", "pptx");
+		pptx.setExportFilter(DocumentFamily.PRESENTATION, "MS PowerPoint pptx");
+		final DocumentFormat xlsx = new DocumentFormat("Microsoft Excel xlsx", DocumentFamily.SPREADSHEET, "application/vnd.ms-excel", "xlsx");
+		xlsx.setExportFilter(DocumentFamily.SPREADSHEET, "MS Excel xlsx");
+		defaultDocumentFormatRegistry.addDocumentFormat(pptx);
+		defaultDocumentFormatRegistry.addDocumentFormat(docx);
+		defaultDocumentFormatRegistry.addDocumentFormat(xlsx);
 		DocumentFormat inputFormat = defaultDocumentFormatRegistry.getFormatByFileExtension(extendName);
 		DocumentFormat outputFormat = defaultDocumentFormatRegistry.getFormatByFileExtension("pdf");
 		try {
@@ -82,7 +102,7 @@ public class DocServiceImpl implements DocService {
 		if (isWindowsSystem()) {
 			// 如果是windows系统
 			// 命令行命令
-			String cmd = exePath + " \"" + pdfPath + "\" -o \"" + filePath + "/" + fileName + ".swf\"";
+			String cmd = exePath + " \"" + pdfPath + "\" -o \"" + filePath + "/" + fileName + ".swf\"" +" -s flashversion=9";
 			// Runtime执行后返回创建的进程对象
 			pro = Runtime.getRuntime().exec(cmd);
 		} else {
@@ -121,4 +141,24 @@ public class DocServiceImpl implements DocService {
 
 	}
 
+	@Override
+	public void updateViewCount(Integer resouceId) {
+		docExtendMapper.updateViewCount(resouceId);
+	}
+
+	@Override
+	public DocDetail findDocDetailById(Integer resouceId) throws IOException {
+
+		DocDetail findDocDetailById = docExtendMapper.findDocDetailById(resouceId);
+		byte[] findSwfFileById = (byte[]) docExtendMapper.findSwfFileById(resouceId);
+		String swfFileTmpName = UUID.randomUUID() + "";
+		OutputStream fileOutputStream = new FileOutputStream(swfTmp + swfFileTmpName + ".swf");
+		OutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+		bufferedOutputStream.write(findSwfFileById);
+		bufferedOutputStream.flush();
+		bufferedOutputStream.close();
+		findDocDetailById.setSwfPath("tmp/" + swfFileTmpName + ".swf");
+		return findDocDetailById;
+
+	}
 }

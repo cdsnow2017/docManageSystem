@@ -32,7 +32,19 @@ public class DocTransferConcurrent extends Thread {
 		try {
 			String pdfPath = dirTemp + UUID.randomUUID() + ".pdf";
 			OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(pdfPath));
-			docService.transferDocToPdf(inputStream, extendName, outputStream);
+			if (extendName.equals("pdf")) {
+				ByteArrayOutputStream bos0 = new ByteArrayOutputStream();
+				byte[] bs0 = new byte[1024];
+				int len0 = -1;
+				while ((len0 = inputStream.read(bs0)) != -1) {
+					bos0.write(bs0, 0, len0);
+				}
+				byte b0[] = bos0.toByteArray();
+				outputStream.write(b0);
+
+			} else {
+				docService.transferDocToPdf(inputStream, extendName, outputStream);
+			}
 			outputStream.flush();
 			outputStream.close();
 			inputStream.close();

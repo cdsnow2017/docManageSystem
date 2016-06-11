@@ -28,13 +28,5 @@ public class UserServiceTest extends AbstractTransactionalJUnit4SpringContextTes
 		
 	}
 
-	@Test
-	public void testUserAuthenticate() {
-		assertEquals(1, userService.loginVerify(2013, "2013", 1));
-		assertEquals(-1, userService.loginVerify(12313, "312312", 1));
-		assertEquals(0, userService.loginVerify(2013, "2013", 2));
-		assertEquals(-2, userService.loginVerify(2013, "23123", 1));
-		
-	}
 
 }

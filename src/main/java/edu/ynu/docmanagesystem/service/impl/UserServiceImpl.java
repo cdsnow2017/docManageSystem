@@ -2,6 +2,8 @@ package edu.ynu.docmanagesystem.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,11 @@ import edu.ynu.docmanagesystem.mapper.UserThisMapper;
 import edu.ynu.docmanagesystem.mapperExtend.UserExtendMapper;
 import edu.ynu.docmanagesystem.po.RoleMenu;
 import edu.ynu.docmanagesystem.po.RoleMenuExample;
+import edu.ynu.docmanagesystem.po.Section;
 import edu.ynu.docmanagesystem.po.UserRole;
 import edu.ynu.docmanagesystem.po.UserRoleExample;
 import edu.ynu.docmanagesystem.po.UserThis;
+import edu.ynu.docmanagesystem.poExtend.PermissionShiroString;
 import edu.ynu.docmanagesystem.service.UserService;
 
 @Service
@@ -31,16 +35,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleMenuMapper roleMenuMapper;
 
-	@Override
-	public int userAuthenticate(Integer userId, Integer resourceId, Integer userAuthorityId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int loginVerify(Integer userId, String password, Integer roleId) {
-		return userExtendMapper.verifyUser(userId, password, roleId);
-	}
 
 	@Override
 	public UserThis findUserById(Integer userId) {
@@ -71,6 +66,15 @@ public class UserServiceImpl implements UserService {
 
 		}
 		return arrayList;
+	}
+
+	@Override
+	public List<String> findShiroPermissionById(Integer userId) {
+		Section section = userExtendMapper.findSectionByUserId(userId);
+		List<PermissionShiroString> shiroPermissionById = userExtendMapper
+		        .findShiroPermissionById(section.getSectionid());
+		return shiroPermissionById.stream().map(PermissionShiroString::toString).collect(Collectors.toList());
+
 	}
 
 }

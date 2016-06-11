@@ -48,9 +48,9 @@
 		<!-- <table tableName="user_this"></table>
 		<table tableName="resourceType"></table> -->
 		<!-- 设置自增字段的值，使得执行insert时返回自增主键的id -->
-		<table tableName="resource">
+		<!-- <table tableName="resource">
 			<generatedKey column="resourceId" sqlStatement="JDBC" />
-		</table>
+		</table> -->
 		<!-- <table tableName="role"></table>
 		<table tableName="role_systemAuthority"></table>
 		<table tableName="section"></table>
@@ -60,6 +60,7 @@
 		<table tableName="user_role"></table>
 		<table tableName="userauthority"></table>
 		<table tableName="role_menu"></table> -->
+        <table tableName="section_userauthority_resourcetype"></table>
 
 
 	</context>
