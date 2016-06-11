@@ -35,4 +35,6 @@ public interface UserService {
 	 */
 	List<String> findShiroPermissionById(Integer userId);
 
+	
+
 }
