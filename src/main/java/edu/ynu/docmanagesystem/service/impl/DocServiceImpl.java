@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.net.ConnectException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,11 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
 import edu.ynu.docmanagesystem.mapper.ResourceMapper;
+import edu.ynu.docmanagesystem.mapper.ResourcetypeMapper;
 import edu.ynu.docmanagesystem.mapperExtend.DocExtendMapper;
 import edu.ynu.docmanagesystem.po.ResourceWithBLOBs;
+import edu.ynu.docmanagesystem.po.Resourcetype;
+import edu.ynu.docmanagesystem.po.ResourcetypeExample;
 import edu.ynu.docmanagesystem.poExtend.DocDetail;
 import edu.ynu.docmanagesystem.poExtend.DocList;
 import edu.ynu.docmanagesystem.service.DocService;
@@ -39,6 +43,9 @@ public class DocServiceImpl implements DocService {
 
 	@Autowired
 	private DocExtendMapper docExtendMapper;
+
+	@Autowired
+	private ResourcetypeMapper resourcetypeMapper;
 
 	// swftools文件路径
 	private final static String exePath = "I:/swftools/pdf2swf.exe";
@@ -65,11 +72,14 @@ public class DocServiceImpl implements DocService {
 	public void transferDocToPdf(InputStream inputStream, String extendName, OutputStream outputStream) {
 		OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
 		DefaultDocumentFormatRegistry defaultDocumentFormatRegistry = new DefaultDocumentFormatRegistry();
-		final DocumentFormat docx = new DocumentFormat("Microsoft Word docx", DocumentFamily.TEXT, "application/msword", "docx");
+		final DocumentFormat docx = new DocumentFormat("Microsoft Word docx", DocumentFamily.TEXT, "application/msword",
+		        "docx");
 		docx.setExportFilter(DocumentFamily.TEXT, "MS Word docx");
-		final DocumentFormat pptx = new DocumentFormat("Microsoft PowerPoint pptx", DocumentFamily.PRESENTATION, "application/vnd.ms-powerpoint", "pptx");
+		final DocumentFormat pptx = new DocumentFormat("Microsoft PowerPoint pptx", DocumentFamily.PRESENTATION,
+		        "application/vnd.ms-powerpoint", "pptx");
 		pptx.setExportFilter(DocumentFamily.PRESENTATION, "MS PowerPoint pptx");
-		final DocumentFormat xlsx = new DocumentFormat("Microsoft Excel xlsx", DocumentFamily.SPREADSHEET, "application/vnd.ms-excel", "xlsx");
+		final DocumentFormat xlsx = new DocumentFormat("Microsoft Excel xlsx", DocumentFamily.SPREADSHEET,
+		        "application/vnd.ms-excel", "xlsx");
 		xlsx.setExportFilter(DocumentFamily.SPREADSHEET, "MS Excel xlsx");
 		defaultDocumentFormatRegistry.addDocumentFormat(pptx);
 		defaultDocumentFormatRegistry.addDocumentFormat(docx);
@@ -102,7 +112,8 @@ public class DocServiceImpl implements DocService {
 		if (isWindowsSystem()) {
 			// 如果是windows系统
 			// 命令行命令
-			String cmd = exePath + " \"" + pdfPath + "\" -o \"" + filePath + "/" + fileName + ".swf\"" +" -s flashversion=9";
+			String cmd = exePath + " \"" + pdfPath + "\" -o \"" + filePath + "/" + fileName + ".swf\""
+			        + " -s flashversion=9";
 			// Runtime执行后返回创建的进程对象
 			pro = Runtime.getRuntime().exec(cmd);
 		} else {
@@ -159,5 +170,20 @@ public class DocServiceImpl implements DocService {
 		bufferedOutputStream.close();
 		findDocDetailById.setSwfPath("tmp/" + swfFileTmpName + ".swf");
 		return findDocDetailById;
+	}
+
+	@Override
+	public List<Integer> findResourceTypeByManageredUserId(Integer userId) {
+		ResourcetypeExample resourcetypeExample = new ResourcetypeExample();
+		resourcetypeExample.or().andResourcemanageridEqualTo(userId);
+		List<Resourcetype> selectByExample = resourcetypeMapper.selectByExample(resourcetypeExample);
+		return selectByExample.stream().map(e -> e.getResourcetypeid()).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public Integer deleteResourceById(Integer resourceId) {
+		return resourceMapper.deleteByPrimaryKey(resourceId);
+		
 	}
 }

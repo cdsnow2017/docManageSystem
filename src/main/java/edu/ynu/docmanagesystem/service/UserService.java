@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.ynu.docmanagesystem.po.UserThis;
+import edu.ynu.docmanagesystem.poExtend.SectionReourceTypeAuthorizationList;
 
 /**
  * description:
@@ -40,6 +41,6 @@ public interface UserService {
 	
 	Map<Object, Object> userOperationCountStatistics();
 	
-	
+	List<SectionReourceTypeAuthorizationList> findSectionReourceTypeAuthorizationList();
 
 }

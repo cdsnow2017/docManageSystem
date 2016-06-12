@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.ynu.docmanagesystem.po.Section;
 import edu.ynu.docmanagesystem.poExtend.PermissionShiroString;
+import edu.ynu.docmanagesystem.poExtend.SectionReourceTypeAuthorizationList;
 
 public interface UserExtendMapper {
 
@@ -14,5 +15,8 @@ public interface UserExtendMapper {
 	Integer selectOperationCountOneUser(Integer userId, String operation);
 	
 	List<Integer> selectAllUserId();
+	
+	
+	List<SectionReourceTypeAuthorizationList> findSectionReourceTypeAuthorizationList();
 
 }

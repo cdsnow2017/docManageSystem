@@ -69,4 +69,21 @@ public class DocController {
 		return docService.findDocDetailById(resourceId);
 	}
 
+	@RequestMapping("/findDocListManagered")
+	@ResponseBody
+	public Map<Object, Object> findDocListManagered() throws IOException {
+		Subject subject = SecurityUtils.getSubject();
+		Integer userId = (Integer) subject.getPrincipal();
+		List<Integer> ids = docService.findResourceTypeByManageredUserId(userId);
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("data", docService.findAllresouceList(null, ids.get(0)));
+		return hashMap;
+	}
+
+	@RequestMapping("/deleteResource")
+	@ResponseBody
+	public Integer deleteResource(Integer resourceId) throws IOException {
+		return docService.deleteResourceById(resourceId);
+	}
+
 }

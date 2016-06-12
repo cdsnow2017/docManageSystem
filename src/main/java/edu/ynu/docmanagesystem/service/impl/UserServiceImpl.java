@@ -23,6 +23,7 @@ import edu.ynu.docmanagesystem.po.UserRole;
 import edu.ynu.docmanagesystem.po.UserRoleExample;
 import edu.ynu.docmanagesystem.po.UserThis;
 import edu.ynu.docmanagesystem.poExtend.PermissionShiroString;
+import edu.ynu.docmanagesystem.poExtend.SectionReourceTypeAuthorizationList;
 import edu.ynu.docmanagesystem.service.UserService;
 import edu.ynu.docmanagesystem.util.LogType;
 
@@ -110,6 +111,11 @@ public class UserServiceImpl implements UserService {
 		hashMap.put("downloadCount", downloadCount);
 		hashMap.put("uploadCount", uploadCount);
 		return hashMap;
+	}
+
+	@Override
+	public List<SectionReourceTypeAuthorizationList> findSectionReourceTypeAuthorizationList() {
+		return userExtendMapper.findSectionReourceTypeAuthorizationList();
 	}
 
 }

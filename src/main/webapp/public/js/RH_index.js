@@ -1,4 +1,3 @@
-
 !function(angular, window, b) {
 	var app = angular.module('myApp', [ 'ngRoute' ]);
 
@@ -52,7 +51,7 @@
 		// controller: "personalCenterController"
 		}).when("/resManage", {
 			templateUrl : "./public/template/resManage.html",
-		 controller: "resController"
+			controller : "resController"
 		}).when("/autManage", {
 			templateUrl : "./public/template/autManage.html",
 		// controller: "UpLoadController"
@@ -227,61 +226,64 @@
 			alert('shabi');
 		})
 	});
-	
+
 	app.controller('resController', function($scope, $http) {
-        $(document).ready(function() {
-            var table = $('#table_id').DataTable({
-                 // ajax: {
-                 //                //指定数据源
-                 //                url: "./"
-                 //            },
-                 //            //每页显示三条数据
-                 //            pageLength: 8,
-                 //            columns: [{
-                 //                "data": "docId"
-                 //            }, {
-                 //                "data": "docName"
-                 //            }, {
-                 //                "data": "uploadPerson"
-                 //            },{
-                 //                "data": "resourceTypeDescribe"
-                 //            }, {
-                 //                "data": "sectionName"
-                 //            }, {
-                 //                "data": "time"
-                 //            }],
-                "columnDefs": [{
-                                "visible": false,
-                                "targets": 0
-                            }]
-                });
+		$(document).ready(function() {
+			var table = $('#table_id').DataTable({
+				ajax : {
+					// 指定数据源
+					url : "./doc/findDocListManagered"
+				},
+				// 每页显示三条数据
+				rowId:'resourceId',
+				pageLength : 8,
+				columns : [ {
+					"data" : "resourceId"
+				}, {
+					"data" : "docName"
+				}, {
+					"data" : "userName"
+				}, {
+					"data" : "resourceTypeDescribe"
+				}, {
+					"data" : "sectionName"
+				}, {
+					"data" : "time"
+				} ],
+			/*	"columnDefs" : [ {
+					"visible" : false,
+					"targets" : 0
+				} ]*/
+			});
 
-            $('#table_id tbody').on('click', 'tr', function() {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                } else {
-                    table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+			$('#table_id tbody').on('click', 'tr', function() {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
 
-            $('#button').click(function() {
-                // alert(table.row('.selected').cell().data());
-                $http({
-                        url: "./",
-                        method: "GET",
-                        params: {
-                            docName: table.row('.selected').cell().data()
-                        }
-                    }).success(function(response) {
-                        table.row('.selected').remove().draw(false);
-                    }).error(function(response) {
-                        alert('shabi');
-                    })
-                    // table.row('.selected').remove().draw(false);
-            });
-        });
-    });
+			$('#button').click(function() {
+				/*$http({
+					url : "./doc/deleteResource",
+					method : "GET",
+					params : {
+						resourceId :table.row('.selected').id()
+					}
+				}).success(function(response) {
+					table.row('.selected').remove().draw(false);
+				}).error(function(response) {
+					alert('shabi');
+				})*/
+				var data = table.row('.selected').data();
+				alert(data.resourceId + data.time);
+//				console.log(table.row('.selected').data());
+				
+			});
+		});
+	});
 
 	app.controller('UpLoadController', function($scope, $http) {
 		$scope.myboolean2 = true;
@@ -425,6 +427,5 @@
 	 * (currentPage !== $scope.totalNum) { $scope.getData(currentPage + 1); } }
 	 * $scope.getData(1); });
 	 */
-
 
 }(angular, window);

@@ -71,4 +71,23 @@ public class UserController {
 		return sectionService.sectionCountStatistics();
 	}
 
+	@RequestMapping("/findSectionReourceTypeAuthorizationList")
+	public @ResponseBody Map<Object, Object> findSectionReourceTypeAuthorizationList() {
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("data", userService.findSectionReourceTypeAuthorizationList());
+		return hashMap;
+	}
+
+	@RequestMapping("/deleteSectionReourceTypeAuthorization")
+	public void deleteSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId,
+	        Integer userAuthorityId, Boolean isCascade) {
+		sectionService.deleteSectionResourceTypeAuthorization(sectionId, resourceTypeId, userAuthorityId, isCascade);
+	}
+
+	@RequestMapping("/addSectionReourceTypeAuthorization")
+	public void addSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
+	        Boolean isCascade) {
+		sectionService.addSectionResourceTypeAuthorization(sectionId, resourceTypeId, userAuthorityId, isCascade);
+	}
+
 }

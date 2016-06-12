@@ -32,7 +32,7 @@ public class SectionServiceImpl implements SectionService {
 	private SectionUserauthorityResourcetypeMapper sectionUserauthorityResourcetypeMapper;
 
 	@Override
-	public void addSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
+	public void addSectionResourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
 	        Boolean isCascade) {
 		Section selectByPrimaryKey = sectionMapper.selectByPrimaryKey(sectionId);
 		SectionUserauthorityResourcetype sectionUserauthorityResourcetype = new SectionUserauthorityResourcetype();
@@ -57,7 +57,7 @@ public class SectionServiceImpl implements SectionService {
 	}
 
 	@Override
-	public void deleteSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId,
+	public void deleteSectionResourceTypeAuthorization(Integer sectionId, Integer resourceTypeId,
 	        Integer userAuthorityId, Boolean isCascade) {
 		SectionUserauthorityResourcetypeKey key = new SectionUserauthorityResourcetypeKey();
 		key.setResourcetypeid(resourceTypeId);

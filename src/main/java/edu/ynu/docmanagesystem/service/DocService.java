@@ -67,5 +67,11 @@ public interface DocService {
 	 * @throws IOException 
 	 */
 	DocDetail findDocDetailById(Integer resourceId) throws IOException;
+	
+	
+	List<Integer> findResourceTypeByManageredUserId(Integer userId);
+	
+	Integer deleteResourceById(Integer resourceId);
+	
 
 }

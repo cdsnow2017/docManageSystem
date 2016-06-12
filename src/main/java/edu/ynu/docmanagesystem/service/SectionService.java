@@ -11,7 +11,7 @@ public interface SectionService {
 	 * @param userAuthorityId 权限id
 	 * @param isCascade 是否级联操作
 	 */
-	void addSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
+	void addSectionResourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
 	        Boolean isCascade);
 
 	/**
@@ -21,7 +21,7 @@ public interface SectionService {
 	 * @param userAuthorityId 权限id
 	 * @param isCascade 是否级联操作 
 	 */
-	void deleteSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
+	void deleteSectionResourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
 	        Boolean isCascade);
 
 	Map<Object, Object> sectionCountStatistics();
