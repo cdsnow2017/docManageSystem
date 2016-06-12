@@ -40,9 +40,9 @@
 
 	<select id="findSectionReourceTypeAuthorizationList" resultType="SectionReourceTypeAuthorizationList">
 		select *
-		from section_userauthority_resourcetype sur,section s ,resourceType r
-		where sur.resourceTypeId = r.resourceTypeId and sur.sectionId =
-		s.sectionId
+        from section_userauthority_resourcetype sur,section s ,resourceType r,userauthority u
+        where sur.resourceTypeId = r.resourceTypeId and sur.sectionId =
+        s.sectionId and u.userAuthorityId = sur.userAuthorityId
 	</select>
 
 

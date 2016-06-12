@@ -54,7 +54,7 @@
 			controller : "resController"
 		}).when("/autManage", {
 			templateUrl : "./public/template/autManage.html",
-		// controller: "UpLoadController"
+			controller : "autController"
 		}).when("/myDoc", {
 			templateUrl : "./public/template/myDoc.html",
 		// controller: "UpLoadController"
@@ -227,6 +227,91 @@
 		})
 	});
 
+	app.controller('autController', function($scope, $http) {
+		$(document).ready(function() {
+			var table = $('#table_id').DataTable({
+				ajax : {
+					// 指定数据源
+					url : "./user/findSectionReourceTypeAuthorizationList"
+				},
+				// 每页显示三条数据
+				pageLength : 5,
+				columns : [ {
+					"data" : "sectionId"
+				}, {
+					"data" : "resourceTypeId"
+				}, {
+					"data" : "userAuthorityId"
+				}, {
+					"data" : "sectionDescribe"
+				}, {
+					"data" : "resourceTypeDescribe"
+				}, {
+					"data" : "userAuthorityDescribe"
+				} ],
+				"columnDefs" : [ {
+					"visible" : false,
+					"targets" : 0
+				}, {
+					"visible" : false,
+					"targets" : 1
+				}, {
+					"visible" : false,
+					"targets" : 2
+				} ]
+			});
+
+			$('#table_id tbody').on('click', 'tr', function() {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+
+			$('#button').click(function() {
+				var sb = table.row('.selected').data();
+
+				if (confirm("是否级联删除？")) {
+					$http({
+						url : "./user/deleteSectionReourceTypeAuthorization",
+						method : "GET",
+						params : {
+							sectionId : sb.sectionId,
+							resourceTypeId : sb.resourceTypeId,
+							userAuthorityId : sb.userAuthorityId,
+							isCascade : true
+						}
+					}).success(function(response) {
+						// table.row('.selected').remove().draw(false);
+						location.reload();
+					}).error(function(response) {
+						alert('shabi');
+					})
+				} else {
+					$http({
+						url : "./user/deleteSectionReourceTypeAuthorization",
+						method : "GET",
+						params : {
+							sectionId : sb.sectionId,
+							resourceTypeId : sb.resourceTypeId,
+							userAuthorityId : sb.userAuthorityId,
+							isCascade : false
+						}
+					}).success(function(response) {
+						location.reload();
+					}).error(function(response) {
+						alert('shabi');
+					})
+
+				}
+
+			});
+
+		});
+
+	});
 	app.controller('resController', function($scope, $http) {
 		$(document).ready(function() {
 			var table = $('#table_id').DataTable({
@@ -235,7 +320,7 @@
 					url : "./doc/findDocListManagered"
 				},
 				// 每页显示三条数据
-				rowId:'resourceId',
+				rowId : 'resourceId',
 				pageLength : 8,
 				columns : [ {
 					"data" : "resourceId"
@@ -250,10 +335,12 @@
 				}, {
 					"data" : "time"
 				} ],
-			/*	"columnDefs" : [ {
+
+				"columnDefs" : [ {
 					"visible" : false,
 					"targets" : 0
-				} ]*/
+				} ]
+
 			});
 
 			$('#table_id tbody').on('click', 'tr', function() {
@@ -266,21 +353,19 @@
 			});
 
 			$('#button').click(function() {
-				/*$http({
+				table.row
+				$http({
 					url : "./doc/deleteResource",
 					method : "GET",
 					params : {
-						resourceId :table.row('.selected').id()
+						resourceId : table.row('.selected').id()
 					}
 				}).success(function(response) {
 					table.row('.selected').remove().draw(false);
 				}).error(function(response) {
 					alert('shabi');
-				})*/
-				var data = table.row('.selected').data();
-				alert(data.resourceId + data.time);
-//				console.log(table.row('.selected').data());
-				
+				})
+
 			});
 		});
 	});
@@ -289,7 +374,7 @@
 		$scope.myboolean2 = true;
 		$scope.data = {
 			"resManage" : false,
-			"autManage" : true,
+			"autManage" : false,
 			"graph" : true,
 			"doc" : true
 		};
@@ -367,65 +452,5 @@
 		})
 
 	});
-
-	/*
-	 * app.controller('companyDocListController', function($http, $scope,
-	 * setPage) { // setPage.init(5,alert); // 每页显示的条数 $scope.num = 5; // 分页数
-	 * var currentPage = 1; $scope.totalNum = 0; // 显示内容 $scope.data = [ { name :
-	 * "angular实战", type : "工作计划", uploadTime : "2016-01-17", updateTime :
-	 * "2016-01-17", author : "sr", section : "人事部" }, { name : "css实战", type :
-	 * "工作计划", uploadTime : "2016-01-17", updateTime : "2016-01-17", author :
-	 * "sr", section : "人事部" }, { name : "angular实战", type : "工作计划", uploadTime :
-	 * "2016-01-17", updateTime : "2016-01-17", author : "sr", section : "人事部" }, {
-	 * name : "HTML实战", type : "工作计划", uploadTime : "2016-01-17", updateTime :
-	 * "2016-01-17", author : "sr", section : "人事部" }, { name : "angular实战",
-	 * type : "工作计划", uploadTime : "2016-01-17", updateTime : "2016-01-17",
-	 * author : "sr", section : "人事部" }, ]; $http({ url : "", method : "GET",
-	 * params : { num : $scope.num } }).success(function(response) {
-	 * $scope.totalNum = response.data; setPage($scope.totalNum,
-	 * $scope.getData);
-	 * 
-	 * }).error(function(response) { console.log("妈比"); })
-	 * 
-	 * $scope.getData = function(page) { currentPage = page; $http({ url : "",
-	 * method : "GET", params : { pageNum : page } }).success(function(response) {
-	 * $scope.data = response.data; }).error(function(response) {
-	 * console.log("妈比"); }) } $scope.prePage = function() { if (currentPage !==
-	 * 1) { $scope.page($scope.getData(currentPage - 1)); } } $scope.lastPage =
-	 * function() { if (currentPage !== $scope.totalNum) {
-	 * $scope.page($scope.getData(currentPage + 1)); } } $scope.getData(1); });
-	 * 
-	 * app.controller('docListController', function($http, $scope, setPage) { //
-	 * setPage.init(5,alert); // 每页显示的条数 $scope.num = 5; var currentPage = 1; //
-	 * 分页数 $scope.totalNum = 0; // 显示内容 $scope.data = [ { name : "angular实战",
-	 * uploadTime : "2016-01-17", section : "人事部", author : "sr" }, { name :
-	 * "angular实战", uploadTime : "2016-01-17", section : "人事部", author : "sr" }, {
-	 * name : "angular实战", uploadTime : "2016-01-17", section : "人事部", author :
-	 * "sr" }, { name : "angular实战", uploadTime : "2016-01-17", section : "人事部",
-	 * author : "sr" }, ]; $http({ url : "", method : "GET", params : { num :
-	 * $scope.num } }).success(function(response) { $scope.totalNum =
-	 * response.data; setPage($scope.totalNum, $scope.getData);
-	 * 
-	 * }).error(function(response) { console.log("something wrong with docList
-	 * init"); })
-	 * 
-	 * $scope.getData = function(page) { currentPage = page; $http({ url : "",
-	 * method : "GET", params : { pageNum : page } }).success(function(response) {
-	 * $scope.data = response.data; }).error(function(response) {
-	 * console.log("something wrong with getData"); }) }
-	 * 
-	 * $scope.searchRes = function() { $http({ url : "", method : "GET", params : {
-	 * num : $scope.num, name : $scope.name, status : $scope.status, }
-	 * }).success(function(response) { $scope.totalNum = response.data;
-	 * setPage($scope.totalNum, $scope.getData);
-	 * 
-	 * }).error(function(response) { console.log("something wrong with
-	 * searchRes"); }) }
-	 * 
-	 * $scope.prePage = function() { if (currentPage !== 1) {
-	 * $scope.getData(currentPage - 1); } } $scope.lastPage = function() { if
-	 * (currentPage !== $scope.totalNum) { $scope.getData(currentPage + 1); } }
-	 * $scope.getData(1); });
-	 */
 
 }(angular, window);

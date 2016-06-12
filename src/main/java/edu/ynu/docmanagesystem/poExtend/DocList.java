@@ -8,11 +8,11 @@ public class DocList {
 	private String time;
 	private String resourceTypeDescribe;
 
-	public Integer getResouceId() {
+	public Integer getResourceId() {
 		return resourceId;
 	}
 
-	public void setResouceId(Integer resouceId) {
+	public void setResourceId(Integer resouceId) {
 		this.resourceId = resouceId;
 	}
 
