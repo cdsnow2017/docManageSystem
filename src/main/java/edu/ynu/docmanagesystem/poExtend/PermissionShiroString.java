@@ -2,16 +2,16 @@ package edu.ynu.docmanagesystem.poExtend;
 
 public class PermissionShiroString {
 
-	private Integer resourceType;
+	private Integer resourceTypeId;
 
 	private Integer userAuthorityId;
 
 	public Integer getResourceType() {
-		return resourceType;
+		return resourceTypeId;
 	}
 
 	public void setResourceType(Integer resourceType) {
-		this.resourceType = resourceType;
+		this.resourceTypeId = resourceType;
 	}
 
 	public Integer getUserAuthorityId() {
@@ -24,7 +24,7 @@ public class PermissionShiroString {
 
 	@Override
 	public String toString() {
-		return resourceType + ":" + userAuthorityId;
+		return resourceTypeId + ":" + userAuthorityId;
 	}
 
 }

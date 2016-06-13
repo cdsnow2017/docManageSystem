@@ -3,6 +3,7 @@ package edu.ynu.docmanagesystem.service;
 import java.util.List;
 import java.util.Map;
 
+import edu.ynu.docmanagesystem.po.Section;
 import edu.ynu.docmanagesystem.po.UserThis;
 import edu.ynu.docmanagesystem.poExtend.SectionReourceTypeAuthorizationList;
 
@@ -42,5 +43,8 @@ public interface UserService {
 	Map<Object, Object> userOperationCountStatistics();
 	
 	List<SectionReourceTypeAuthorizationList> findSectionReourceTypeAuthorizationList();
+	
+	Section findSectionByUserId(Integer userId);
+	
 
 }

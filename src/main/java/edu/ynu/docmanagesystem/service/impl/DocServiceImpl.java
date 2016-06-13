@@ -10,7 +10,9 @@ import java.io.InputStream;
 
 import java.io.OutputStream;
 import java.net.ConnectException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -184,6 +186,19 @@ public class DocServiceImpl implements DocService {
 	@Override
 	public Integer deleteResourceById(Integer resourceId) {
 		return resourceMapper.deleteByPrimaryKey(resourceId);
-		
+
+	}
+
+	@Override
+	public Integer findResourceTypeByResourceId(Integer resourceId) {
+		return docExtendMapper.findResourceTypeByResourceId(resourceId);
+	}
+
+	@Override
+	public Map<Object, Object> findDocFileByResourceId(Integer resourceId) {
+		HashMap<Object, Object> hashMap = new HashMap<>();
+		hashMap.put("fileName", docExtendMapper.findDocNameById(resourceId));
+		hashMap.put("bytes", docExtendMapper.findDocFileById(resourceId));
+		return hashMap;
 	}
 }

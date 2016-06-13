@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 
 import edu.ynu.docmanagesystem.poExtend.DocDetail;
 import edu.ynu.docmanagesystem.poExtend.DocList;
@@ -67,11 +68,13 @@ public interface DocService {
 	 * @throws IOException 
 	 */
 	DocDetail findDocDetailById(Integer resourceId) throws IOException;
-	
-	
+
 	List<Integer> findResourceTypeByManageredUserId(Integer userId);
-	
+
 	Integer deleteResourceById(Integer resourceId);
-	
+
+	Integer findResourceTypeByResourceId(Integer resourceId);
+
+	Map<Object, Object> findDocFileByResourceId(Integer resourceId);
 
 }

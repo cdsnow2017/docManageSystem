@@ -118,4 +118,9 @@ public class UserServiceImpl implements UserService {
 		return userExtendMapper.findSectionReourceTypeAuthorizationList();
 	}
 
+	@Override
+	public Section findSectionByUserId(Integer userId) {
+		return userExtendMapper.findSectionByUserId(userId);
+	}
+
 }

@@ -28,6 +28,15 @@ public class CustomRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		List<Integer> findRoleById = userService.findRoleById(userId);
 		List<String> roles = findRoleById.stream().map(String::valueOf).collect(Collectors.toList());
+//		List<String> permissions = userService.findShiroPermissionById(userId);
+//		List<String> collect = permissions.stream().map(e -> e.toString()).collect(Collectors.toList());
+		for(String string : roles){
+			System.out.println("角色:  " + string);
+		}
+		List<String> findShiroPermissionById = userService.findShiroPermissionById(userId);
+		for(String string : findShiroPermissionById){
+			System.out.println("权限:  " + string);
+		}
 		simpleAuthorizationInfo.addRoles(roles);
 		simpleAuthorizationInfo.addStringPermissions(userService.findShiroPermissionById(userId));
 		return simpleAuthorizationInfo;

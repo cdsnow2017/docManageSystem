@@ -60,6 +60,26 @@
 
 	</select>
 
+	<select id="findResourceTypeByResourceId" resultType="Integer">
+		select
+		resourceTypeId
+		from resource
+		where resource.resourceId = #{0}
 
+	</select>
+
+	<select id="findDocFileById" resultType="Object">
+		select contain
+		from resource
+		where resourceId = #{0}
+
+	</select>
+
+
+	<select id="findDocNameById" resultType="String">
+		select originalFileName
+		from resource
+		where resource.resourceId = #{0}
+	</select>
 
 </mapper>

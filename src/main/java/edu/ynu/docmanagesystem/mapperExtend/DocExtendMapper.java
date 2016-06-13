@@ -16,4 +16,10 @@ public interface DocExtendMapper {
 	DocDetail findDocDetailById(Integer resouceId);
 
 	Object findSwfFileById(Integer resouceId);
+	
+	Integer findResourceTypeByResourceId(Integer resourceId);
+	
+	Object findDocFileById(Integer resourceId);
+	
+	String findDocNameById(Integer resourceId);
 }
