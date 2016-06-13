@@ -179,7 +179,7 @@
             myChart1.setOption(option1);
 
         }).error(function(response) {
-            alert('shabi');
+            
         })
 
         $http({
@@ -226,7 +226,7 @@
             };
             myChart2.setOption(option2);
         }).error(function(response) {
-            alert('shabi');
+            
         })
     });
 
@@ -290,7 +290,7 @@
                         // table.row('.selected').remove().draw(false);
                         location.reload();
                     }).error(function(response) {
-                        alert('shabi');
+                        
                     })
                 } else {
                     $http({
@@ -305,7 +305,7 @@
                     }).success(function(response) {
                         location.reload();
                     }).error(function(response) {
-                        alert('shabi');
+                        
                     })
 
                 }
@@ -366,7 +366,7 @@
                 }).success(function(response) {
                     table.row('.selected').remove().draw(false);
                 }).error(function(response) {
-                    alert('shabi');
+                    
                 })
 
             });
@@ -453,7 +453,7 @@
                 location.href = "/index.html#/unAuthority";
            }
         }).error(function(response) {
-            alert('shabi');
+            
         })
 
     /*    $scope.download = function() {
