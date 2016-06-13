@@ -87,6 +87,7 @@ public class DocController {
 	public Map<Object, Object> findDocListManagered() throws IOException {
 		Subject subject = SecurityUtils.getSubject();
 		Integer userId = (Integer) subject.getPrincipal();
+		System.out.println("哈哈哈" + subject.hasRole("2"));
 		List<Integer> ids = docService.findResourceTypeByManageredUserId(userId);
 		HashMap<Object, Object> hashMap = new HashMap<>();
 		hashMap.put("data", docService.findAllresouceList(null, ids.get(0)));
@@ -104,15 +105,16 @@ public class DocController {
 		Subject subject = SecurityUtils.getSubject();
 		Integer userId = (Integer) subject.getPrincipal();
 		Integer resourceType = docService.findResourceTypeByResourceId(resourceId);
-		if (!subject.isPermitted(resourceType + "2")) {
-			response.sendRedirect("/somePage.jsp");
+		if (!subject.isPermitted(resourceType + ":2")) {
+			response.sendRedirect("/index.html#/unAuthority");
 			return null;
 		} else {
 			userService.insertLog(userId, resourceId, LogType.download);
 			// 获取文件路径，返回用户要下载的文件
 			Map<Object, Object> doc = docService.findDocFileByResourceId(resourceId);
+			String fileName = new String(((String) doc.get("fileName")).getBytes("UTF-8"), "iso-8859-1");// 为了解决中文名称乱码问题
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentDispositionFormData("attachment", (String) doc.get("fileName"));
+			headers.setContentDispositionFormData("attachment", fileName);
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			return new ResponseEntity<byte[]>((byte[]) doc.get("bytes"), headers, HttpStatus.CREATED);
 		}

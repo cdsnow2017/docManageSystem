@@ -22,7 +22,7 @@
 		<!-- 认证成功统一跳转到first.action，建议不配置，shiro认证成功自动到上一个请求路径 -->
 		<!-- <property name="successUrl" value="/first.action"/> -->
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面 -->
-		<property name="unauthorizedUrl" value="/login.html" />
+		<property name="unauthorizedUrl" value="/ErrorState.json" />
 		<!-- 自定义filter配置 -->
 		<!-- <property name="filters"> <map> 将自定义 的FormAuthenticationFilter注入shiroFilter中 
 			<entry key="authc" value-ref="formAuthenticationFilter" /> </map> </property> -->
@@ -30,26 +30,24 @@
 		<!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
 		<property name="filterChainDefinitions">
 			<value>
+				<!-- 资料管理员拥有权限 -->
+				/doc/findDocListManagered = roles[2]
+				/doc/deleteResource = roles[2]
+				<!-- 公司领导拥有权限 -->
+				/user/userOperationCountStatistics = roles[3]
+				/user/sectionCountStatistics = roles[3]
+				<!-- 系统管理员拥有权限 -->
+				/user/findSectionReourceTypeAuthorizationList = roles[4]
+				/user/deleteSectionReourceTypeAuthorization = roles[4]
+				/user/addSectionReourceTypeAuthorization = roles[4]
 				<!-- 对静态资源设置匿名访问 -->
 				/images/** = anon
 				/js/** = anon
 				/public/** = anon
 				/user/login = anon
-				<!-- /doc/upload = authc /user/menu = authc -->
-				<!-- 验证码，可匿名访问 -->
-				<!-- /validatecode.jsp = anon -->
-
-				<!-- 请求 logout.action地址，shiro去清除session -->
 				/logout = logout
-				<!--商品查询需要商品查询权限 ，取消url拦截配置，使用注解授权方式 -->
-	      <!--       /items/queryItems.action = perms[item:query]
-	            /items/editItems.action= perms[item:edit] -->
-				<!-- 配置记住我或认证通过可以访问的地址 -->
-				<!-- /index.jsp = user /first.action = user /welcome.jsp = user -->
-				<!-- /** = authc 所有url都必须认证通过才可以访问 -->
-				/** = anon
-				<!-- /** = anon所有url都可以匿名访问 -->
-
+				<!-- 所有路径必须经过认证才能访问 -->
+				/** = authc
 			</value>
 		</property>
 	</bean>

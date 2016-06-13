@@ -83,22 +83,22 @@
                         </div>
                         <div class="row2" ng-hide="data.resManage">
                             <div class="col-md-10 col-md-offset-1">
-                                <h4 class="btn" id="personalInfo" onclick="location.href='#/resManage'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 资源管理</h4>
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/resManage'"><span class="glyphicon glyphicon-wrench" aria-hidden={{data.resManage}}></span> 资源管理</h4>
                             </div>
                         </div>
                         <div class="row2" ng-hide="data.autManage">
                             <div class="col-md-10 col-md-offset-1">
-                                <h4 class="btn" id="personalInfo" onclick="location.href='#/autManage'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 权限管理</h4>
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/autManage'"><span class="glyphicon glyphicon-wrench" aria-hidden={{data.autManage}}></span> 权限管理</h4>
                             </div>
                         </div>
                         <div class="row2" ng-hide="data.graph">
                             <div class="col-md-10 col-md-offset-1">
-                                <h4 class="btn" id="personalInfo" onclick="location.href='#/chart'"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 统计报表</h4>
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/chart'"><span class="glyphicon glyphicon-stats" aria-hidden={{data.graph}}></span> 统计报表</h4>
                             </div>
                         </div>
                         <div class="row2" ng-hide="data.doc">
                             <div class="col-md-10 col-md-offset-1">
-                                <h4 class="btn" id="personalInfo" onclick="location.href='#/docList'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 查看文档</h4>
+                                <h4 class="btn" id="personalInfo" onclick="location.href='#/docList'"><span class="glyphicon glyphicon-eye-open" aria-hidden={{data.doc}}></span> 查看文档</h4>
                             </div>
                         </div>
                         <div class="row2">

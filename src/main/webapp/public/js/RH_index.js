@@ -376,8 +376,8 @@
     app.controller('UpLoadController', function($scope, $http) {
         $scope.myboolean2 = true;
         $scope.data = {
-            "resManage": false,
-            "autManage": false,
+            "resManage": true,
+            "autManage": true,
             "graph": true,
             "doc": true
         };
@@ -420,7 +420,7 @@
                 resourceId: $scope.resNum
             }
         }).success(function(response) {
-            if(response!=null){
+            if(response.resourceId != null  && response.resourceId != ''){
             $scope.data = response;
             var startDocument = "Paper";
             $('#documentViewer').FlexPaperViewer({
@@ -450,25 +450,26 @@
                 }
             });
            }else{
-                location.href = "/index.html#/personalCenter";
+                location.href = "/index.html#/unAuthority";
            }
         }).error(function(response) {
             alert('shabi');
         })
 
-        $scope.download = function() {
+    /*    $scope.download = function() {
             $http({
-                url: "./user/",
-                method: "GET",
+                url: "./doc/download",
+                method: "POST",
                 params: {
                     resourceId: $scope.resNum
-                }
+                },
+            	headers : { 'Content-Type': 'application/x-www-form-urlencoded' } 
             }).success(function(response) {
 
             }).error(function(response) {
                 alert('shabi');
             })
-        }
+        }*/
     });
 
 }(angular, window);
