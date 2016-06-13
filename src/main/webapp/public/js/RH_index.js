@@ -76,6 +76,9 @@
         }).when("/chart", {
             templateUrl: "./public/template/chart.html",
             controller: "chartController"
+        }).when("/unAuthority", {
+            templateUrl: "./public/template/unAuthority.html",
+            // controller: "chartController"
 
         }).otherwise({
             redirectTo: "/index"
@@ -417,7 +420,7 @@
                 resourceId: $scope.resNum
             }
         }).success(function(response) {
-
+            if(response!=null){
             $scope.data = response;
             var startDocument = "Paper";
             $('#documentViewer').FlexPaperViewer({
@@ -446,7 +449,9 @@
                     localeChain: 'en_US'
                 }
             });
-
+           }else{
+                location.href = "/index.html#/personalCenter";
+           }
         }).error(function(response) {
             alert('shabi');
         })
