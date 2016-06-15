@@ -26,37 +26,33 @@ public class CustomRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		Integer userId = (Integer) arg0.getPrimaryPrincipal();
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+		//查询用户拥有的角色
 		List<Integer> findRoleById = userService.findRoleById(userId);
+		//使用java8的流将角色转为字符串
 		List<String> roles = findRoleById.stream().map(String::valueOf).collect(Collectors.toList());
-//		List<String> permissions = userService.findShiroPermissionById(userId);
-//		List<String> collect = permissions.stream().map(e -> e.toString()).collect(Collectors.toList());
-		for(String string : roles){
-			System.out.println("角色:  " + string);
-		}
-		List<String> findShiroPermissionById = userService.findShiroPermissionById(userId);
-		for(String string : findShiroPermissionById){
-			System.out.println("权限:  " + string);
-		}
+		//把角色信息加入授权
 		simpleAuthorizationInfo.addRoles(roles);
+		//加入用户拥有的权限
 		simpleAuthorizationInfo.addStringPermissions(userService.findShiroPermissionById(userId));
 		return simpleAuthorizationInfo;
 
 	}
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
-
-		// 第一步从token中取出用户名
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) 
+			throws AuthenticationException {
+		// 取出用户唯一标识
 		String userId = (String) arg0.getPrincipal();
+		// 如果用户不存在返回空，认证失败
 		UserThis user = userService.findUserById(Integer.valueOf(userId));
 		if (user == null) {
 			return null;
 		}
-
-		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user.getUserid(),
+		// 存在此用户，对密码进行验证。
+		SimpleAuthenticationInfo simpleAuthenticationInfo = 
+				new SimpleAuthenticationInfo(user.getUserid(),
 		        user.getPassword(), ByteSource.Util.bytes(user.getSalt()), this.getName());
 		return simpleAuthenticationInfo;
-
 	}
 
 }

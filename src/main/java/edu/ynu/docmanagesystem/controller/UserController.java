@@ -81,14 +81,22 @@ public class UserController {
 	@RequestMapping("/deleteSectionReourceTypeAuthorization")
 	public String deleteSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId,
 	        Integer userAuthorityId, Boolean isCascade) {
-		sectionService.deleteSectionResourceTypeAuthorization(sectionId, resourceTypeId, userAuthorityId, isCascade);
+		try {
+			sectionService.deleteSectionResourceTypeAuthorization(sectionId, resourceTypeId, userAuthorityId, isCascade);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/index.html#/autManage";
 	}
 
 	@RequestMapping("/addSectionReourceTypeAuthorization")
 	public String addSectionReourceTypeAuthorization(Integer sectionId, Integer resourceTypeId, Integer userAuthorityId,
 	        Boolean isCascade) {
-		sectionService.addSectionResourceTypeAuthorization(sectionId, resourceTypeId, userAuthorityId, isCascade);
+		try {
+			sectionService.addSectionResourceTypeAuthorization(sectionId, resourceTypeId, userAuthorityId, isCascade);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/index.html#/autManage";
 	}
 
